@@ -53,7 +53,8 @@ def update_readme(tool_url: str | None) -> None:
     if README_BEGIN not in text or README_END not in text:
         return
     if tool_url:
-        body = f"Das Cockpit ist veröffentlicht unter: <{tool_url}>"
+        body = (f"**▶ [Cockpit öffnen]({tool_url})** — läuft direkt im Browser, "
+                "ohne Installation")
     else:
         body = ("Noch nicht veröffentlicht -- sobald die Adresse in `site.json` steht, "
                 "trägt `python build.py` sie hier und in der Case Study ein.")
