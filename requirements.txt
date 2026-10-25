@@ -1,0 +1,3 @@
+# Laufzeit des Datengenerators und der Analyse: nur Python-Standardbibliothek.
+# Zusaetzlich wird lediglich ein Test-Runner benoetigt.
+pytest>=8.0

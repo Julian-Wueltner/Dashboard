@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Case Study Vertrieb — Angebotserfolgsquote im Markt SE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+/* ------------------------------------------------------------------ *
+ * Case Study - genau zwei A4-Seiten.
+ * Farben und Typografie nach docs/UI_GUIDE.md Abschnitt 3, 4 und 8.
+ * Ampelfarben tragen ausschliesslich das Symbol (OP-11); jedes
+ * Ampel-Textlabel steht in --ink-body.
+ * Im Template steht keine Ziffer an einer Textposition (A5): Zahlen
+ * sind Platzhalter, Zaehler stehen im Stylesheet.
+ * ------------------------------------------------------------------ */
+:root{
+  --ink-heading:#2f4f6f;
+  --ink-body:#333333;
+  --ink-muted:#5a6670;
+  --accent:#5b7c99;
+  --rule:#ccd2d7;
+  --surface-fill:#eef1f4;
+  --status-good:#2e7d32;
+  --status-warn:#b26a00;
+  --status-bad:#b3261e;
+}
+@page{ size:A4 portrait; margin:14mm 16mm; }
+
+*{ box-sizing:border-box; }
+html{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+body{
+  margin:0;
+  font-family:'Lato','Segoe UI',Arial,sans-serif;
+  font-size:10pt;
+  line-height:1.5;
+  color:var(--ink-body);
+  font-variant-numeric:tabular-nums;
+  font-feature-settings:"tnum";
+  counter-reset:seite;
+}
+
+/* ---- Seitengeruest ------------------------------------------------ */
+.seite{ counter-increment:seite; }
+.seite + .seite{ break-before:page; }
+
+h1{ font-size:16pt; line-height:1.15; font-weight:700; color:var(--ink-heading); margin:0 0 1.2mm 0; }
+h2{ font-size:11.5pt; line-height:1.15; font-weight:700; color:var(--ink-heading); margin:0 0 1.4mm 0; break-after:avoid; }
+h3{ font-size:9.5pt; line-height:1.2; font-weight:700; color:var(--ink-heading); margin:0 0 0.8mm 0; break-after:avoid; }
+p{ margin:0 0 1.4mm 0; }
+section{ margin-bottom:2.8mm; }
+.letzte{ margin-bottom:0; }
+
+/* ---- Kopf --------------------------------------------------------- */
+.hinweiszeile{
+  font-size:8pt; line-height:1.3; color:var(--ink-muted);
+  padding-bottom:1mm; margin-bottom:1.8mm;
+  border-bottom:0.6pt solid var(--rule);
+}
+.untertitel{ font-size:9.5pt; line-height:1.25; color:var(--accent); font-weight:700; margin:0 0 1.4mm 0; }
+.kopfmeta{
+  display:flex; flex-wrap:wrap; gap:0 4mm;
+  font-size:8pt; line-height:1.3; color:var(--ink-muted);
+  margin:0 0 2.6mm 0; padding-bottom:1.2mm;
+  border-bottom:1.2pt solid var(--ink-heading);
+}
+
+/* ---- Ausgangslage: Nummern kommen aus dem Zaehler, nicht aus dem Text */
+.ausgangslage{ counter-reset:satz; }
+.ausgangslage p{ margin-bottom:1mm; padding-left:5mm; text-indent:-5mm; }
+.ausgangslage p::before{
+  content:counter(satz) "  "; counter-increment:satz;
+  color:var(--accent); font-weight:700;
+}
+.fussnote{ font-size:7.5pt; line-height:1.28; color:var(--ink-muted); margin:1.2mm 0 0 0; }
+.einleitung{ font-size:7.5pt; line-height:1.28; color:var(--ink-muted); margin:0 0 1.2mm 0; }
+
+/* ---- Grafiken ----------------------------------------------------- */
+.grafiken{ display:flex; gap:6mm; }
+.grafik{ flex:1 1 0; min-width:0; }
+.grafik svg{ display:block; width:100%; height:auto; }
+.grafiktitel{ font-size:8.5pt; line-height:1.2; font-weight:700; color:var(--ink-body); margin:0 0 0.6mm 0; }
+.grafikquelle{ font-size:7.5pt; line-height:1.28; color:var(--ink-muted); margin:0.6mm 0 0 0; }
+
+/* ---- Tabellen ----------------------------------------------------- */
+table{ width:100%; border-collapse:collapse; break-inside:avoid; }
+thead th{
+  font-size:8pt; line-height:1.15; font-weight:700; color:var(--ink-heading);
+  text-align:left; vertical-align:bottom; background:var(--surface-fill);
+  padding:0.9mm 1.4mm; border-bottom:0.6pt solid var(--ink-heading);
+}
+tbody td{
+  font-size:8.5pt; line-height:1.22; vertical-align:top;
+  padding:1mm 1.4mm; border-bottom:0.6pt solid var(--rule);
+}
+tbody tr{ break-inside:avoid; }
+.feldname{ font-weight:700; color:var(--ink-body); }
+.nebentext{ color:var(--ink-muted); }
+
+.handlungsfelder{ table-layout:fixed; }
+.handlungsfelder col.feld{ width:28%; }
+.handlungsfelder col.bereich{ width:16%; }
+.handlungsfelder col.wert{ width:20%; }
+.handlungsfelder col.wirkung{ width:20%; }
+.handlungsfelder col.status{ width:16%; }
+
+/* ---- Ampel (OP-11: Farbe nur am Symbol, Text in --ink-body) ------- */
+.ampel{ display:inline-block; color:var(--ink-body); font-weight:700; }
+.ampel .zeichen{ padding-right:0.7mm; }
+.rot .zeichen{ color:var(--status-bad); }
+.gelb .zeichen{ color:var(--status-warn); }
+.gruen .zeichen{ color:var(--status-good); }
+
+/* ---- Optionen ----------------------------------------------------- */
+.optionen{ table-layout:fixed; }
+.optionen td:first-child{ width:15mm; font-weight:700; color:var(--ink-heading); }
+.optionen td:last-child{ width:22mm; }
+
+/* ---- Bewertungsmatrix --------------------------------------------- */
+.bewertung{ table-layout:fixed; }
+.bewertung th:first-child, .bewertung td:first-child{ width:30mm; }
+.bewertung td{ padding:0.9mm 1.4mm; }
+.einstufung{ font-weight:700; display:block; line-height:1.15; }
+.begruendung{ display:block; font-size:7.5pt; line-height:1.2; color:var(--ink-muted); margin-top:0.3mm; }
+.empfohlen{ background:var(--surface-fill); }
+
+/* ---- Empfehlungskasten -------------------------------------------- */
+.kasten{
+  border:0.6pt solid var(--rule); border-left:2pt solid var(--ink-heading);
+  padding:1.6mm 2.2mm; break-inside:avoid;
+}
+.kasten h3{ margin-bottom:0.6mm; }
+.kasten p{ margin-bottom:0; }
+.trigger{
+  margin-top:1.2mm; padding-top:1mm; border-top:0.6pt solid var(--rule);
+  font-size:8.5pt; line-height:1.3;
+}
+.trigger .marke{ font-weight:700; color:var(--ink-heading); }
+
+/* ---- Zeitleiste und Effektkarten ---------------------------------- */
+.reihe{ display:flex; gap:2mm; }
+.reihe + .reihe{ margin-top:2mm; }
+.phase, .karte{ flex:1 1 0; min-width:0; }
+.phase{ border-top:1.6pt solid var(--accent); padding-top:0.9mm; }
+h3.zwischen{ margin-top:2.4mm; }
+.phasenname{ display:block; font-size:8.5pt; font-weight:700; color:var(--ink-heading); line-height:1.15; }
+.phasentext{ display:block; font-size:7.5pt; line-height:1.2; color:var(--ink-muted); margin-top:0.3mm; }
+.karte{ border:0.6pt solid var(--rule); padding:1mm 1.4mm; }
+.kartenlabel{ display:block; font-size:7.5pt; line-height:1.2; color:var(--ink-muted); }
+.kartenwert{ display:block; font-size:8.5pt; line-height:1.2; font-weight:700; color:var(--ink-heading); margin:0.3mm 0; }
+.kartennote{ display:block; font-size:7.5pt; line-height:1.2; color:var(--ink-muted); }
+
+/* ---- Fusszeile ---------------------------------------------------- */
+.werkzeug{
+  margin-top:1.2mm; font-size:9pt; line-height:1.3; font-weight:700; color:var(--ink-heading);
+}
+.werkzeug a{ color:var(--ink-heading); }
+.fusszeile{
+  margin-top:3mm; padding-top:1.2mm; border-top:0.6pt solid var(--rule);
+  font-size:7.5pt; line-height:1.25; color:var(--ink-muted);
+  display:flex; justify-content:space-between; gap:4mm;
+}
+.fusszeile .seitenzahl::before{ content:"Seite " counter(seite) " von 2"; }
+</style>
+</head>
+<body>
+
+<!-- ================================================================ -->
+<!-- SEITE 1 - Ausgangslage, Analyse, Handlungsfelder                  -->
+<!-- ================================================================ -->
+<div class="seite">
+
+  <div class="hinweiszeile">Demo mit fiktiven Daten · eigene Initiative · erstellt mit KI-Unterstützung</div>
+
+  <h1>Angebotserfolgsquote im Markt {{fall_markt}}: vom Kennzahlenabfall zur Entscheidung</h1>
+  <p class="untertitel">Arbeitsprobe internationaler Vertrieb — automatische Analyse, Handlungsfelder und Entscheidungsvorlage aus einem Datensatz</p>
+  <div class="kopfmeta">
+    <span>Julian Wültner</span>
+    <span>Stand: {{stand_kw}}</span>
+    <span>Datensatz: {{zeitraum_datensatz}}, {{anzahl_maerkte}} Märkte, {{anzahl_kennzahlen}} Kennzahlen</span>
+    <span>Auswahl: Markt {{fall_markt}}</span>
+  </div>
+
+  <section class="ausgangslage">
+    <h2>Ausgangslage</h2>
+    <p>Im Markt {{fall_markt}} ist die Angebotserfolgsquote der {{fall_partner}} seit {{fall_beginn_kw}} von {{erfolgsquote_vorher}} auf {{erfolgsquote_nachher}} gefallen — {{erfolgsquote_abweichung}} gegenüber der Vergleichsbasis {{erfolgsquote_vergleichsbasis}} und unter dem Zielwert {{erfolgsquote_ziel}}. Ein lokaler Wettbewerber ist aufgetreten.</p>
+    <p>Mit {{angebotszeit_versatz_wochen}} Woche Versatz steigt seit {{angebotszeit_beginn_kw}} im selben Markt die Angebotsdurchlaufzeit von {{angebotszeit_vorher}} auf {{angebotszeit_nachher}}; ein zeitlicher Zusammenhang, kein Ursachennachweis.</p>
+    <p>Von {{angebote_entschieden}} entschiedenen Angeboten gingen {{angebote_verloren}} zusätzlich verloren; der entgangene Deckungsbeitrag liegt bei {{wirkung_fall_euro}} ({{db_je_auftrag_markt}} je Auftrag); der Umsatzindex fällt von {{umsatzindex_markt_vorher}} auf {{umsatzindex_markt_nachher}}.</p>
+  </section>
+
+  <section>
+    <h2>Analyse</h2>
+    <div class="grafiken">
+      <div class="grafik">
+        <p class="grafiktitel">Angebotserfolgsquote, Markt {{fall_markt}}</p>
+        <!--CHART:erfolgsquote-->
+        <p class="grafikquelle">Vergleichsbasis {{erfolgsquote_vergleichsbasis}}: {{erfolgsquote_vorher}}. Seit {{fall_beginn_kw}}: {{erfolgsquote_nachher}}, z-Wert {{erfolgsquote_zwert}}. Gesamtgeschäft {{erfolgsquote_gesamt}}.</p>
+      </div>
+      <div class="grafik">
+        <p class="grafiktitel">Angebotsdurchlaufzeit, Markt {{fall_markt}}</p>
+        <!--CHART:angebotszeit-->
+        <p class="grafikquelle">Vor dem Anstieg: {{angebotszeit_vorher}}. Seit {{angebotszeit_beginn_kw}}: {{angebotszeit_nachher}}, Abstand {{angebotszeit_abweichung}}. Zielwert {{angebotszeit_ziel}}.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="letzte">
+    <h2>Erkannte Handlungsfelder</h2>
+    <p class="einleitung">Die automatische Analyse meldet {{anzahl_laufende_auffaelligkeiten}} laufende Auffälligkeiten; eine fünfte ist behoben und belegt, dass das Vorgehen trägt.</p>
+    <table class="handlungsfelder">
+      <colgroup><col class="feld"><col class="bereich"><col class="wert"><col class="wirkung"><col class="status"></colgroup>
+      <thead>
+        <tr>
+          <th scope="col">Handlungsfeld</th>
+          <th scope="col">Fachbereich</th>
+          <th scope="col">Messwert und Zielwert</th>
+          <th scope="col">Geschätzte Wirkung</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="feldname">Angebotserfolgsquote</span><br><span class="nebentext">{{fall_entitaet}}, seit {{fall_beginn_kw}}</span></td>
+          <td><!--FACHBEREICH:F-01--></td>
+          <td>{{erfolgsquote_nachher}} gegen {{erfolgsquote_ziel}}<br><span class="nebentext">Warnschwelle {{erfolgsquote_warnschwelle}}</span></td>
+          <td>{{wirkung_fall_euro_kompakt}}<br><span class="nebentext">{{angebote_verloren}} verlorene Angebote</span></td>
+          <td><!--AMPEL:F-01--></td>
+        </tr>
+        <tr>
+          <td><span class="feldname">Angebotsdurchlaufzeit</span><br><span class="nebentext">seit {{angebotszeit_beginn_kw}}, Folgeeffekt von {{folgeeffekt_referenz}}</span></td>
+          <td><!--FACHBEREICH:F-04--></td>
+          <td>{{angebotszeit_nachher}}<br><span class="nebentext">gegen {{angebotszeit_ziel}}</span></td>
+          <td>{{angebotszeit_wartestunden}}<br><span class="nebentext">zusätzliche Wartezeit der Kunden</span></td>
+          <td><!--AMPEL:F-04--></td>
+        </tr>
+        <tr>
+          <td><span class="feldname">Reklamationen Artikel {{artikel_id}}</span><br><span class="nebentext">{{artikel_gruppe}}, seit {{artikel_beginn_kw}}, Grund {{artikel_hauptgrund}}</span></td>
+          <td><!--FACHBEREICH:F-02--></td>
+          <td>{{artikel_quote}}<br><span class="nebentext">übrige Artikel {{artikel_vergleich_von}} bis {{artikel_vergleich_bis}}</span></td>
+          <td>{{artikel_wirkung_euro}}<br><span class="nebentext">{{artikel_zusatzreklamationen}} zusätzliche Reklamationen</span></td>
+          <td><!--AMPEL:F-02--></td>
+        </tr>
+        <tr>
+          <td><span class="feldname">Wachstumsengpass Markt {{wachstum_markt}}</span><br><span class="nebentext">seit {{wachstum_beginn_kw}}, {{wachstum_wochen_ueber_engpass}} Wochen über der Engpassschwelle</span></td>
+          <td><!--FACHBEREICH:F-05--></td>
+          <td>Aktivitätsgrad {{aktivitaet_nachher}} gegen {{aktivitaet_ziel}}<br><span class="nebentext">Angebotsdurchlaufzeit {{wachstum_angebotszeit_nachher}}</span></td>
+          <td>{{wachstum_kundenwochen_ohne_kontakt}}<br><span class="nebentext">Kundenwochen ohne Kontakt</span></td>
+          <td><!--AMPEL:F-05--></td>
+        </tr>
+        <tr>
+          <td><span class="feldname">Liefertreue Markt {{liefertreue_markt}}</span><br><span class="nebentext">Maßnahme abgeschlossen, wirksam ab {{liefertreue_wirksam_ab}}</span></td>
+          <td><!--FACHBEREICH:F-03--></td>
+          <td>{{liefertreue_nachher_mit_zeitraum}}<br><span class="nebentext">gegen {{liefertreue_ziel}}</span></td>
+          <td>{{liefertreue_veraenderung}}<br><span class="nebentext">vorher {{liefertreue_vorher}} in {{liefertreue_zeitraum_vorher}}</span></td>
+          <td><!--AMPEL:F-03--></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="fussnote">Erkennungsregel: eingefrorene Vergleichsbasis über {{regel_baseline_wochen}} Wochen, z-Wert ab {{regel_zschwelle}}, Alarm erst nach {{regel_folgewochen}} auffälligen Wochen, Mindeststichprobe {{regel_mindeststichprobe}} Vorgänge ({{regel_mindeststichprobe_artikel}} Positionen je Artikel). Die abgeschlossene Maßnahme vergleicht gegen den Zeitraum ab Wirksamkeit, nicht gegen das Jahresmittel von {{liefertreue_jahreswert}}. Alle Zusammenhänge sind zeitlich, nicht kausal.</p>
+  </section>
+
+  <div class="fusszeile">
+    <span class="seitenzahl"></span>
+    <span>Demo mit fiktiven Daten · eigene Initiative · erstellt mit KI-Unterstützung · Stand: {{stand_kw}}</span>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!-- SEITE 2 - Entscheidungsvorlage, Umsetzung, Effekt, Ausblick       -->
+<!-- ================================================================ -->
+<div class="seite">
+
+  <div class="hinweiszeile">Demo mit fiktiven Daten · eigene Initiative · erstellt mit KI-Unterstützung</div>
+
+  <h1>Entscheidungsvorlage: Angebotserfolgsquote im Markt {{fall_markt}}</h1>
+  <div class="kopfmeta">
+    <span>Bezug: Auffälligkeit {{folgeeffekt_referenz}}, {{fall_entitaet}}</span>
+    <span>Zielkennzahl: Angebotserfolgsquote {{massnahme_ziel}}</span>
+    <span>Stand: {{stand_kw}}</span>
+  </div>
+  <p>Zu entscheiden ist, auf welchem Weg die Angebotserfolgsquote von {{erfolgsquote_nachher}} zurück auf {{erfolgsquote_ziel}} kommt.</p>
+
+  <section>
+    <h2>Optionen</h2>
+    <table class="optionen">
+      <tbody>
+        <tr>
+          <td>Option A</td>
+          <td><span class="feldname">{{option_a_titel}}</span><br><span class="nebentext">Nachlass von {{option_a_nachlass}} auf neue Angebote; im Befundzeitraum {{option_a_kosten}} Deckungsbeitrag.</span></td>
+          <td>{{option_a_aufwand}}</td>
+        </tr>
+        <tr>
+          <td>Option B</td>
+          <td><span class="feldname">{{option_b_titel}}</span><br><span class="nebentext">Eigene Gesellschaft für beide Vertretungen; einmalig {{option_b_einmalig}}, laufend {{option_b_laufend}} je Jahr.</span></td>
+          <td>{{option_b_aufwand}}</td>
+        </tr>
+        <tr>
+          <td>Option C</td>
+          <td><span class="feldname">{{option_c_titel}}</span><br><span class="nebentext">Zielvereinbarung zur Erfolgsquote, Angebotsschulung und festes Wochengespräch mit der Vertretung.</span></td>
+          <td>{{option_c_aufwand}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Bewertung</h2>
+    <table class="bewertung">
+      <thead>
+        <tr>
+          <th scope="col">Dimension</th>
+          <th scope="col">Option A</th>
+          <th scope="col">Option B</th>
+          <th scope="col" class="empfohlen">Option C</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="feldname">Kosten, einmalig und laufend</td>
+          <td><span class="einstufung"><!--EINSTUFUNG:A:kosten--></span><span class="begruendung">Der Nachlass kostet laufend Deckungsbeitrag auf jedem neuen Auftrag im Markt.</span></td>
+          <td><span class="einstufung"><!--EINSTUFUNG:B:kosten--></span><span class="begruendung">Gründung, Personal und Übergabe kosten einmalig und laufend deutlich mehr als eine Vertretung.</span></td>
+          <td class="empfohlen"><span class="einstufung"><!--EINSTUFUNG:C:kosten--></span><span class="begruendung">Schulung und Zielvereinbarung kosten wenig; die Provision bleibt im bestehenden Rahmen.</span></td>
+        </tr>
+        <tr>
+          <td class="feldname">Risiko</td>
+          <td><span class="einstufung"><!--EINSTUFUNG:A:risiko--></span><span class="begruendung">Der Wettbewerber kann nachziehen; ein Nachlass lässt sich später kaum zurücknehmen.</span></td>
+          <td><span class="einstufung"><!--EINSTUFUNG:B:risiko--></span><span class="begruendung">Die Kunden wechseln während der Übergabe den Ansprechpartner; Wissen der Vertretung kann verloren gehen.</span></td>
+          <td class="empfohlen"><span class="einstufung"><!--EINSTUFUNG:C:risiko--></span><span class="begruendung">Der eingespielte Partner bleibt, die Kundenbeziehungen bleiben unverändert.</span></td>
+        </tr>
+        <tr>
+          <td class="feldname">Zeit bis zur Wirkung</td>
+          <td><span class="einstufung"><!--EINSTUFUNG:A:zeit_bis_wirkung--></span><span class="begruendung">Neue Konditionen gelten nach rund vier Wochen für jedes neue Angebot.</span></td>
+          <td><span class="einstufung"><!--EINSTUFUNG:B:zeit_bis_wirkung--></span><span class="begruendung">Gründung, Einstellung und Einarbeitung brauchen rund dreißig Wochen.</span></td>
+          <td class="empfohlen"><span class="einstufung"><!--EINSTUFUNG:C:zeit_bis_wirkung--></span><span class="begruendung">Rund acht Wochen, bis Zielvereinbarung und Schulung abgeschlossen sind.</span></td>
+        </tr>
+        <tr>
+          <td class="feldname">Kundenwirkung</td>
+          <td><span class="einstufung"><!--EINSTUFUNG:A:kundenwirkung--></span><span class="begruendung">Der Preis wird wettbewerbsfähig; Angebotszeit und Betreuung bleiben unverändert.</span></td>
+          <td><span class="einstufung"><!--EINSTUFUNG:B:kundenwirkung--></span><span class="begruendung">Eigene Präsenz mit Technik und Innendienst vor Ort, auch für das Wachstum in NO.</span></td>
+          <td class="empfohlen"><span class="einstufung"><!--EINSTUFUNG:C:kundenwirkung--></span><span class="begruendung">Schnellere Angebote und engere Betreuung; der Preisabstand zum Wettbewerber bleibt.</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <div class="kasten">
+      <h3>Empfehlung</h3>
+      <p>Empfohlen wird Option {{empfehlung_option}}: Sie wirkt in {{option_c_aufwand}} bei geringstem Risiko und soll die Erfolgsquote von {{empfehlung_effekt_von}} auf {{empfehlung_effekt_bis}} und die Durchlaufzeit von {{empfehlung_angebotszeit_von}} auf {{empfehlung_angebotszeit_bis}} zurückführen. Der Preis: Für das Wachstum in {{wachstum_markt}} entsteht keine Kapazität — das leistet nur Option B.</p>
+      <p class="trigger"><span class="marke">Eskalationstrigger:</span> Bleibt die Angebotserfolgsquote im Markt {{fall_markt}} {{eskalation_frist}} der Zielvereinbarung unter {{eskalation_schwelle}}, wird Option B vorbereitet. Verantwortlich <!--VERANTWORTLICH-->.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Umsetzung und erwarteter Effekt</h2>
+    <h3>Zeitleiste der Maßnahme: von der Anforderung bis zur Bewertung</h3>
+    <div class="reihe">
+      <div class="phase"><span class="phasenname">Anforderung</span><span class="phasentext">Zielkennzahl und Zielwert</span></div>
+      <div class="phase"><span class="phasenname">Konzept</span><span class="phasentext">Drei bewertete Optionen</span></div>
+      <div class="phase"><span class="phasenname">Test/Pilot</span><span class="phasentext">Zielvereinbarung und Schulung</span></div>
+      <div class="phase"><span class="phasenname">Roll-out</span><span class="phasentext">Wochengespräch etabliert</span></div>
+      <div class="phase"><span class="phasenname">Bewertung</span><span class="phasentext">Vorher-nachher-Vergleich</span></div>
+    </div>
+    <h3 class="zwischen">Erwarteter Effekt in Zahlen</h3>
+    <div class="reihe">
+      <div class="karte"><span class="kartenlabel">Angebotserfolgsquote</span><span class="kartenwert">{{empfehlung_effekt_von}} auf {{empfehlung_effekt_bis}}</span><span class="kartennote">Markt {{fall_markt}}, je Woche</span></div>
+      <div class="karte"><span class="kartenlabel">Angebotsdurchlaufzeit</span><span class="kartenwert">{{empfehlung_angebotszeit_von}} auf {{empfehlung_angebotszeit_bis}}</span><span class="kartennote">Zielwert der Kennzahl</span></div>
+      <div class="karte"><span class="kartenlabel">Entschiedene Angebote</span><span class="kartenwert">{{angebote_entschieden}} Angebote</span><span class="kartennote">davon {{angebote_verloren}} zusätzlich verloren</span></div>
+      <div class="karte"><span class="kartenlabel">Entgangener Deckungsbeitrag</span><span class="kartenwert">{{wirkung_fall_euro}}</span><span class="kartennote">{{angebote_verloren}} Aufträge je {{db_je_auftrag_markt}}</span></div>
+    </div>
+    <p class="fussnote">Fortschritt {{massnahme_fortschritt}} Phasen, jede mit Freigabekriterium; verantwortlich <!--VERANTWORTLICH-->, beteiligt <!--BETEILIGT-->. Die Wirkung wird {{eskalation_frist}} gegen {{massnahme_ziel}} gemessen.</p>
+  </section>
+
+  <section class="letzte">
+    <h2>Ausblick: Wachstumsszenario</h2>
+    <p>Schon im Ist hat die {{szenario_partner}} {{szenario_engpasswochen_ist}} Engpasswochen ab {{szenario_erste_engpasswoche_ist}}; bei {{szenario_mehrvolumen}} Mehrvolumen sind es {{szenario_engpasswochen_ohne}}. Eine Tochtergesellschaft ab {{szenario_erweiterung_quartal}} mit {{szenario_verlagerung_anteil}} der Angebote senkt das auf {{szenario_engpasswochen_mit}} (Modellrechnung, keine Prognose).</p>
+    <p class="werkzeug">Live-Tool mit geführtem Demo-Fall: {{TOOL_URL}}</p>
+  </section>
+
+  <div class="fusszeile">
+    <span class="seitenzahl"></span>
+    <span>Demo mit fiktiven Daten · eigene Initiative · erstellt mit KI-Unterstützung · Stand: {{stand_kw}}</span>
+  </div>
+</div>
+
+</body>
+
+</html>

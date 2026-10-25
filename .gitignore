@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Node
+node_modules/
+
+# OS / Editor
+Thumbs.db
+.DS_Store
+.vscode/
+
+# Interne Arbeitsunterlagen: nur lokal, nicht im Repository
+docs/INTERVIEW_BRIEFING.md
+PROMPT.md
+ANPASSUNG.md
+DECISIONS.md
+docs/SPEC.md
+docs/UI_GUIDE.md
+docs/QA_REPORT.md
+docs/PROJECT_CHARTER.md
+.claude/
+
+# Temporary build artefacts (control dataset, scratch renders)
+data/dataset_control.json
+*.tmp
