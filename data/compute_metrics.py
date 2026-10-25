@@ -61,11 +61,7 @@ BREAKDOWN_LEVELS = [
 
 PARTNER_NAME = dict(an.PARTNER_LABEL)
 
-#: Ausgeschriebene Ländernamen für Texte, die auch ohne Vertriebswissen lesbar sein
-#: sollen (Case Study). Cockpit und Kennzahlenblöcke behalten die Kürzel.
-MARKET_NAME = {"DE": "Deutschland", "FR": "Frankreich", "IT": "Italien",
-               "GB": "Großbritannien", "PL": "Polen", "NL": "Niederlande",
-               "SE": "Schweden", "NO": "Norwegen", "DK": "Dänemark", "FI": "Finnland"}
+MARKET_NAME = dict(an.MARKET_LABEL)
 
 
 def market_names(codes: list[str]) -> str:
@@ -640,8 +636,8 @@ def _item_finding(dataset: an.Dataset, item: an.ItemFinding,
     explanation = (
         f"Für {label} liegt die Reklamationsquote im Zeitraum "
         f"{fmt.week_range(start_week, end_week)} bei {kpi.text(item.value)} gegenüber "
-        f"{kpi.text(item.peer_value)} bei den übrigen Artikeln derselben Produktgruppe "
-        f"(z-Wert {fmt.number(item.zscore, 1)}). Über das ganze Jahr sind es "
+        f"{kpi.text(item.peer_value)} bei den übrigen Artikeln derselben Produktgruppe. "
+        f"Über das ganze Jahr sind es "
         f"{kpi.text(year['value'])} gegenüber {kpi.text(year['peer_low'])} bis "
         f"{kpi.text(year['peer_high'])} der übrigen Artikel. Häufigster Grund ist "
         f"„{top_label}“ mit {fmt.percent(top_share, 0)} der Reklamationen. Der Vergleich "
@@ -826,7 +822,7 @@ def build_measures(dataset: an.Dataset, findings: list[dict]) -> list[dict]:
     start = win["start_week"]
     running = {
         "id": "M-01",
-        "title": f"Angebotserfolgsquote im Markt {win['entity']['market']} zurückgewinnen",
+        "title": f"Angebotserfolgsquote im Markt {MARKET_NAME[win['entity']['market']]} zurückgewinnen",
         "finding_id": win["id"],
         "also_affected": [lead["id"]] if lead else [],
         "also_affected_departments": [lead["department"]] if lead else [],
@@ -884,7 +880,7 @@ def build_measures(dataset: an.Dataset, findings: list[dict]) -> list[dict]:
 
     completed = {
         "id": "M-02",
-        "title": f"Liefertreue im Markt {otif['entity']['market']} zurückführen",
+        "title": f"Liefertreue im Markt {MARKET_NAME[otif['entity']['market']]} zurückführen",
         "finding_id": otif["id"],
         "also_affected": [],
         "also_affected_departments": [],
@@ -994,7 +990,7 @@ def build_scenario(dataset: an.Dataset) -> dict:
     critical = an.critical_agency(base_case, sources)
     return {
         "formula": an.SCENARIO_FORMULA,
-        "formula_note": "Modellrechnung, keine Prognose (AK-14.3).",
+        "formula_note": "Modellrechnung, keine Prognose.",
         "bottleneck_threshold": an.SCENARIO_BOTTLENECK_THRESHOLD,
         "bottleneck_threshold_text": fmt.percent(an.SCENARIO_BOTTLENECK_THRESHOLD),
         "target_utilization": TARGET_UTILIZATION,
@@ -1144,7 +1140,7 @@ def build_decision_paper(dataset: an.Dataset, findings: list[dict],
     decided = next((step["value"] for step in win["impact"]["chain"]
                     if step["label"].startswith("Entschiedene Angebote")), "")
 
-    market_phrase = f"Markt {market}"
+    market_phrase = f"Markt {MARKET_NAME[market]}"
     situation = [
         (f"Im {market_phrase} ist die Angebotserfolgsquote der Vertretung seit "
          f"{win['start_week_text']} von {win['strength']['baseline_text']} auf "
@@ -1629,6 +1625,7 @@ def build_metrics(dataset: an.Dataset, dataset_path: Path) -> dict:
             "labels": {
                 "partners": PARTNER_NAME,
                 "channels": CHANNEL_NAME,
+                "markets": MARKET_NAME,
             },
         },
         "kpis": kpis,

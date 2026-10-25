@@ -218,6 +218,18 @@
     "subsidiary": "Tochtergesellschaft",
     "agency": "Handelsvertretung",
     "direct": "Direktvertrieb ab Werk"
+   },
+   "markets": {
+    "DE": "Deutschland",
+    "FR": "Frankreich",
+    "IT": "Italien",
+    "GB": "Großbritannien",
+    "PL": "Polen",
+    "NL": "Niederlande",
+    "SE": "Schweden",
+    "NO": "Norwegen",
+    "DK": "Dänemark",
+    "FI": "Finnland"
    }
   }
  },
@@ -6694,11 +6706,11 @@
    "unit": "%",
    "entity": {
     "scope": "market_partner",
-    "label": "Markt SE, Vertretung 4 (SE)",
+    "label": "Markt Schweden, Vertretung 4 (SE)",
     "market": "SE",
     "partner": "partner_4"
    },
-   "entity_label": "Markt SE, Vertretung 4 (SE)",
+   "entity_label": "Markt Schweden, Vertretung 4 (SE)",
    "start_week": 32,
    "start_week_text": "KW 32",
    "end_week": 52,
@@ -6783,7 +6795,7 @@
     "method": "Betroffene Menge × Abweichung × Satz je Vorgang aus dem Datensatz"
    },
    "department": "Vertrieb",
-   "explanation": "Für Markt SE, Vertretung 4 (SE) liegt die Angebotserfolgsquote seit KW 32 bei 21,2 % gegenüber 33,7 % in den acht Wochen davor (z-Wert 9,0; Zielwert 32,0 %). [automatisch erstellt]",
+   "explanation": "Für Markt Schweden, Vertretung 4 (SE) liegt die Angebotserfolgsquote seit KW 32 bei 21,2 % gegenüber 33,7 % in den acht Wochen davor (Zielwert 32,0 %). [automatisch erstellt]",
    "proposed_action": "Verlorene Angebote mit der Vertretung auswerten (Preis, Lieferzeit, Wettbewerber) und eine Zielvereinbarung mit Wochengespräch aufsetzen.",
    "severity": "hoch",
    "status": "laufend",
@@ -7126,7 +7138,7 @@
     "method": "Betroffene Menge × Abweichung × Satz je Vorgang aus dem Datensatz"
    },
    "department": "Qualität",
-   "explanation": "Für Artikel MOD-1042 (Formteile) liegt die Reklamationsquote im Zeitraum KW 37–52 bei 3,67 % gegenüber 1,04 % bei den übrigen Artikeln derselben Produktgruppe (z-Wert 5,7). Über das ganze Jahr sind es 1,96 % gegenüber 0,97 % bis 1,15 % der übrigen Artikel. Häufigster Grund ist „Maßabweichung“ mit 68 % der Reklamationen. Der Vergleich läuft gegen die übrigen Artikel derselben Produktgruppe, nicht gegen einen Gesamtdurchschnitt — sonst würde der Gruppeneffekt als Fehler gemeldet. [automatisch erstellt]",
+   "explanation": "Für Artikel MOD-1042 (Formteile) liegt die Reklamationsquote im Zeitraum KW 37–52 bei 3,67 % gegenüber 1,04 % bei den übrigen Artikeln derselben Produktgruppe. Über das ganze Jahr sind es 1,96 % gegenüber 0,97 % bis 1,15 % der übrigen Artikel. Häufigster Grund ist „Maßabweichung“ mit 68 % der Reklamationen. Der Vergleich läuft gegen die übrigen Artikel derselben Produktgruppe, nicht gegen einen Gesamtdurchschnitt — sonst würde der Gruppeneffekt als Fehler gemeldet. [automatisch erstellt]",
    "proposed_action": "Werkzeug und Maßhaltigkeit des Artikels prüfen, betroffene Charge sperren und Kunden proaktiv informieren.",
    "severity": "hoch",
    "status": "laufend",
@@ -7228,10 +7240,10 @@
    "unit": "%",
    "entity": {
     "scope": "market",
-    "label": "Markt PL",
+    "label": "Markt Polen",
     "market": "PL"
    },
-   "entity_label": "Markt PL",
+   "entity_label": "Markt Polen",
    "start_week": 5,
    "start_week_text": "KW 5",
    "end_week": 13,
@@ -7306,7 +7318,7 @@
     "method": "Betroffene Menge × Abweichung × Satz je Vorgang aus dem Datensatz"
    },
    "department": "Logistik",
-   "explanation": "Für Markt PL lag die Liefertreue im Zeitraum KW 5–13 bei 86,6 % gegenüber 95,9 % davor und liegt seit KW 14 wieder bei 95,9 % (z-Wert 9,4; Zielwert 95,0 %). [automatisch erstellt]",
+   "explanation": "Für Markt Polen lag die Liefertreue im Zeitraum KW 5–13 bei 86,6 % gegenüber 95,9 % davor und liegt seit KW 14 wieder bei 95,9 % (Zielwert 95,0 %). [automatisch erstellt]",
    "proposed_action": "Termin- und Mengentreue je Auftrag auswerten und Liefertermine mit der Fertigungsplanung abstimmen.",
    "severity": "mittel",
    "status": "behoben",
@@ -7538,10 +7550,10 @@
    "unit": "Stunden",
    "entity": {
     "scope": "market",
-    "label": "Markt SE",
+    "label": "Markt Schweden",
     "market": "SE"
    },
-   "entity_label": "Markt SE",
+   "entity_label": "Markt Schweden",
    "start_week": 33,
    "start_week_text": "KW 33",
    "end_week": 52,
@@ -7618,7 +7630,7 @@
     "hours_text": "105.266,2 Stunden"
    },
    "department": "Vertriebsinnendienst",
-   "explanation": "Für Markt SE liegt die Angebotsdurchlaufzeit von der Anfrage bis zum Angebot seit KW 33 bei 39,4 Stunden gegenüber 22,0 Stunden in den acht Wochen davor (z-Wert 11,8; Zielwert 24,0 Stunden). [automatisch erstellt]",
+   "explanation": "Für Markt Schweden liegt die Angebotsdurchlaufzeit von der Anfrage bis zum Angebot seit KW 33 bei 39,4 Stunden gegenüber 22,0 Stunden in den acht Wochen davor (Zielwert 24,0 Stunden). [automatisch erstellt]",
    "proposed_action": "Angebotsfreigaben im Vertriebsinnendienst bündeln und Standardangebote für wiederkehrende Anfragen vorbereiten.",
    "severity": "hoch",
    "status": "laufend",
@@ -7851,10 +7863,10 @@
    "unit": "%",
    "entity": {
     "scope": "market",
-    "label": "Markt NO",
+    "label": "Markt Norwegen",
     "market": "NO"
    },
-   "entity_label": "Markt NO",
+   "entity_label": "Markt Norwegen",
    "start_week": 41,
    "start_week_text": "KW 41",
    "end_week": 52,
@@ -7935,7 +7947,7 @@
     "weeks_over_warning": 12
    },
    "department": "Partnermanagement",
-   "explanation": "Für Markt NO liegt der Aktivitätsgrad der Vertretung seit KW 41 bei 75,7 % gegenüber 88,1 % in den acht Wochen davor (z-Wert 12,2; Zielwert 85,0 %). Im selben Zeitraum weicht auch die Angebotsdurchlaufzeit von der Anfrage bis zum Angebot ab. [automatisch erstellt]",
+   "explanation": "Für Markt Norwegen liegt der Aktivitätsgrad der Vertretung seit KW 41 bei 75,7 % gegenüber 88,1 % in den acht Wochen davor (Zielwert 85,0 %). Im selben Zeitraum weicht auch die Angebotsdurchlaufzeit von der Anfrage bis zum Angebot ab. [automatisch erstellt]",
    "proposed_action": "Betreuung der Schlüsselkunden mit der Vertretung neu planen und Kapazität der Vertretung an das Wachstum anpassen.",
    "severity": "hoch",
    "status": "laufend",
@@ -8206,7 +8218,7 @@
  "measures": [
   {
    "id": "M-01",
-   "title": "Angebotserfolgsquote im Markt SE zurückgewinnen",
+   "title": "Angebotserfolgsquote im Markt Schweden zurückgewinnen",
    "finding_id": "F-01",
    "also_affected": [
     "F-04"
@@ -8216,7 +8228,7 @@
    ],
    "owner": "Vertriebsleitung Nordeuropa",
    "department": "Vertrieb",
-   "entity_label": "Markt SE, Vertretung 4 (SE)",
+   "entity_label": "Markt Schweden, Vertretung 4 (SE)",
    "target_kpi": "quote_win_rate",
    "target_kpi_label": "Angebotserfolgsquote",
    "target_value": 0.32,
@@ -8284,13 +8296,13 @@
   },
   {
    "id": "M-02",
-   "title": "Liefertreue im Markt PL zurückführen",
+   "title": "Liefertreue im Markt Polen zurückführen",
    "finding_id": "F-03",
    "also_affected": [],
    "also_affected_departments": [],
    "owner": "Auftragsabwicklung und Logistik",
    "department": "Logistik",
-   "entity_label": "Markt PL",
+   "entity_label": "Markt Polen",
    "target_kpi": "otif_rate",
    "target_kpi_label": "Liefertreue (Termin und Menge)",
    "target_value": 0.95,
@@ -8387,7 +8399,7 @@
  ],
  "scenario": {
   "formula": "bearbeitete Angebote × (1 + Mehrvolumen) ÷ geplante Angebotskapazität; mit eigener Tochtergesellschaft ab dem gewählten Quartal übernimmt diese einen festen Anteil der Angebote der skandinavischen Vertretungen mit eigener Kapazität",
-  "formula_note": "Modellrechnung, keine Prognose (AK-14.3).",
+  "formula_note": "Modellrechnung, keine Prognose.",
   "bottleneck_threshold": 0.92,
   "bottleneck_threshold_text": "92,0 %",
   "target_utilization": 0.85,
@@ -11337,7 +11349,7 @@
      "quarter": "Q1",
      "owner": "Partnermanagement",
      "text": "Bei 20 % Mehrvolumen bleibt keine Engpasswoche; die geplante Angebotskapazität der Vertretungen trägt das Volumen. [automatisch erstellt]",
-     "rule": "Regel: keine Engpasswoche im Ergebnis (AK-15.4)."
+     "rule": "Regel: keine Engpasswoche im Ergebnis."
     },
     {
      "quarter": "Q1",
@@ -17022,8 +17034,8 @@
  },
  "decision_paper": {
   "head": {
-   "title": "Entscheidungsvorlage: Angebotserfolgsquote im Markt SE",
-   "reference": "Maßnahme M-01 „Angebotserfolgsquote im Markt SE zurückgewinnen“ · auslösende Auffälligkeit F-01",
+   "title": "Entscheidungsvorlage: Angebotserfolgsquote im Markt Schweden",
+   "reference": "Maßnahme M-01 „Angebotserfolgsquote im Markt Schweden zurückgewinnen“ · auslösende Auffälligkeit F-01",
    "decision_need": "Zu entscheiden ist, mit welchem der drei Wege die Angebotserfolgsquote zurück auf den Zielwert gebracht wird.",
    "as_of": "KW 52",
    "as_of_text": "Stand: KW 52",
@@ -17032,7 +17044,7 @@
   },
   "situation": {
    "sentences": [
-    "Im Markt SE ist die Angebotserfolgsquote der Vertretung seit KW 32 von 33,7 % auf 21,2 % gefallen; im Markt ist ein lokaler Wettbewerber aufgetreten.",
+    "Im Markt Schweden ist die Angebotserfolgsquote der Vertretung seit KW 32 von 33,7 % auf 21,2 % gefallen; im Markt ist ein lokaler Wettbewerber aufgetreten.",
     "Seit KW 33 steigt im selben Markt die Angebotsdurchlaufzeit von 22,0 Stunden auf 39,4 Stunden, weil mehr Angebote nachverhandelt werden — zeitlicher Zusammenhang, kein statistischer Ursachennachweis.",
     "Von 5.901 entschiedenen Angeboten gingen 737 zusätzlich verloren; der entgangene Deckungsbeitrag liegt bei rund 0,96 Mio. €."
    ],
@@ -17169,7 +17181,7 @@
   },
   "recommendation": {
    "option": "C",
-   "text": "Empfohlen wird Option C: Die Stärkung der bestehenden Vertretung wirkt in 8 Wochen bei geringstem Risiko und soll die Angebotserfolgsquote im Markt SE von 21,2 % auf den Zielwert 32,0 % zurückführen; die Angebotsdurchlaufzeit soll von 39,4 Stunden auf den Zielwert 24,0 Stunden sinken. Im Befundzeitraum gingen 737 Angebote zusätzlich verloren, entgangen sind rund 0,96 Mio. € Deckungsbeitrag. Der Preis dieser Entscheidung: Option C schließt den Preisabstand zum neuen Wettbewerber nicht und schafft keine Kapazität für das Wachstum in NO — das leistet nur Option B.",
+   "text": "Empfohlen wird Option C: Die Stärkung der bestehenden Vertretung wirkt in 8 Wochen bei geringstem Risiko und soll die Angebotserfolgsquote im Markt Schweden von 21,2 % auf den Zielwert 32,0 % zurückführen; die Angebotsdurchlaufzeit soll von 39,4 Stunden auf den Zielwert 24,0 Stunden sinken. Im Befundzeitraum gingen 737 Angebote zusätzlich verloren, entgangen sind rund 0,96 Mio. € Deckungsbeitrag. Der Preis dieser Entscheidung: Option C schließt den Preisabstand zum neuen Wettbewerber nicht und schafft keine Kapazität für das Wachstum in NO — das leistet nur Option B.",
    "expected_win_rate_from_text": "21,2 %",
    "expected_win_rate_to_text": "32,0 %",
    "expected_lead_time_from_text": "39,4 Stunden",
@@ -17178,7 +17190,7 @@
    "impact_text": "rund 0,96 Mio. €"
   },
   "escalation_trigger": {
-   "text": "Bleibt die Angebotserfolgsquote im Markt SE acht Wochen nach Abschluss der Zielvereinbarung unter dem Zielwert von 32,0 %, wird Option B vorbereitet.",
+   "text": "Bleibt die Angebotserfolgsquote im Markt Schweden acht Wochen nach Abschluss der Zielvereinbarung unter dem Zielwert von 32,0 %, wird Option B vorbereitet.",
    "measure": "Angebotserfolgsquote",
    "threshold_text": "32,0 %",
    "deadline_text": "8 Wochen nach Abschluss",
@@ -17228,8 +17240,8 @@
   "situation": {
    "sentences": [
     "Stand KW 52 erreichen 9 von 10 Kennzahlen ihren Zielwert, 1 liegt zwischen Zielwert und Warnschwelle und 0 verfehlen die Warnschwelle.",
-    "Die automatische Analyse führt 4 laufende Auffälligkeiten; die größte geschätzte Wirkung trägt F-01 (Angebotserfolgsquote, Markt SE, Vertretung 4 (SE)) mit rund 0,96 Mio. €.",
-    "Die Liefertreue im Markt PL liegt nach der abgeschlossenen Maßnahme bei 95,9 % seit KW 14 und damit über dem Zielwert von 95,0 %."
+    "Die automatische Analyse führt 4 laufende Auffälligkeiten; die größte geschätzte Wirkung trägt F-01 (Angebotserfolgsquote, Markt Schweden, Vertretung 4 (SE)) mit rund 0,96 Mio. €.",
+    "Die Liefertreue im Markt Polen liegt nach der abgeschlossenen Maßnahme bei 95,9 % seit KW 14 und damit über dem Zielwert von 95,0 %."
    ],
    "notice": "[automatisch erstellt]"
   },
@@ -17349,7 +17361,7 @@
    {
     "id": "F-01",
     "kpi_label": "Angebotserfolgsquote",
-    "entity_label": "Markt SE, Vertretung 4 (SE)",
+    "entity_label": "Markt Schweden, Vertretung 4 (SE)",
     "department": "Vertrieb",
     "impact_text": "rund 0,96 Mio. €",
     "quantity_text": "737",
@@ -17371,7 +17383,7 @@
    {
     "id": "F-04",
     "kpi_label": "Angebotsdurchlaufzeit (Anfrage bis Angebot)",
-    "entity_label": "Markt SE",
+    "entity_label": "Markt Schweden",
     "department": "Vertriebsinnendienst",
     "impact_text": "nicht in Euro bezifferbar",
     "quantity_text": "+17,4 Stunden",
@@ -17383,7 +17395,7 @@
   "measures_status": [
    {
     "id": "M-01",
-    "title": "Angebotserfolgsquote im Markt SE zurückgewinnen",
+    "title": "Angebotserfolgsquote im Markt Schweden zurückgewinnen",
     "status": "offen",
     "current_phase": "Anforderung",
     "progress_text": "0 von 5",
@@ -17391,7 +17403,7 @@
    },
    {
     "id": "M-02",
-    "title": "Liefertreue im Markt PL zurückführen",
+    "title": "Liefertreue im Markt Polen zurückführen",
     "status": "abgeschlossen",
     "current_phase": "Bewertung",
     "progress_text": "5 von 5",
@@ -17418,7 +17430,7 @@
   "umsatzindex_gesamt": "102,8",
   "fall_markt": "SE",
   "fall_partner": "Vertretung 4 (SE)",
-  "fall_entitaet": "Markt SE, Vertretung 4 (SE)",
+  "fall_entitaet": "Markt Schweden, Vertretung 4 (SE)",
   "fall_beginn_kw": "KW 32",
   "erfolgsquote_vorher": "33,7 %",
   "erfolgsquote_nachher": "21,2 %",

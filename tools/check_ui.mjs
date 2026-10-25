@@ -180,7 +180,7 @@ async function main() {
     await sleep(400);
     const atGesetzt = await run(`(() => {
       const ziel = [...document.querySelectorAll('button,label,option')]
-        .find(e => (e.innerText || e.value || '').trim() === 'SE');
+        .find(e => (e.innerText || e.value || '').trim() === 'Schweden');
       if (!ziel) return null; ziel.click(); return true; })()`);
     await sleep(900);
     const nachher = await run(`[...document.querySelectorAll('.kpi')].map(e => e.innerText)

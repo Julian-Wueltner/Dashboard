@@ -1113,6 +1113,10 @@ PARTNER_LABEL = {
     "partner_6": "Vertretung 6 (NL, FI)",
     "nordic_subsidiary": "Tochtergesellschaft Skandinavien (geplant)",
 }
+#: Ausgeschriebene Ländernamen -- Kürzel wie "SE" versteht nicht jeder Leser.
+MARKET_LABEL = {"DE": "Deutschland", "FR": "Frankreich", "IT": "Italien",
+                "GB": "Großbritannien", "PL": "Polen", "NL": "Niederlande",
+                "SE": "Schweden", "NO": "Norwegen", "DK": "Dänemark", "FI": "Finnland"}
 CHANNEL_LABEL = {"subsidiary": "Tochtergesellschaft", "agency": "Handelsvertretung",
                  "direct": "Direktvertrieb ab Werk"}
 
@@ -1124,6 +1128,8 @@ def entity_label(scope: str, entity: tuple) -> str:
             parts.append(PARTNER_LABEL.get(value, value))
         elif column == "channel":
             parts.append(CHANNEL_LABEL.get(value, value))
+        elif column == "market":
+            parts.append(MARKET_LABEL.get(value, value))
         else:
             parts.append(str(value))
     if not parts:
@@ -1137,7 +1143,8 @@ def explanation_text(kpi: Kpi, label: str, start_week: int, baseline: float,
     """Erklaerungssatz aus einer Vorlage (F5, AK-07.3).
 
     Kein Eigenname, kein Superlativ, kein Wort ueber Ursachen -- der Satz nennt
-    Kennzahl, Einheit, Zeitraum, Vorher-nachher, z-Wert und Zielwert. Ein
+    Kennzahl, Einheit, Zeitraum, Vorher-nachher und Zielwert; der z-Wert
+    steht nicht im Fließtext, sondern im Befundkopf. Ein
     behobener Fall bekommt eine eigene Fassung: "lag ... und liegt seit ...
     wieder bei ...", damit niemand ihn fuer laufend haelt.
     """
@@ -1147,14 +1154,13 @@ def explanation_text(kpi: Kpi, label: str, start_week: int, baseline: float,
             f"{fmt.week_range(start_week, end_week)} bei {kpi.text(current)} "
             f"gegenüber {kpi.text(baseline)} davor und liegt seit "
             f"{fmt.week(end_week + 1)} wieder bei {kpi.text(after)} "
-            f"(z-Wert {fmt.number(zscore, 1)}; Zielwert {kpi.text(kpi.target)})."
+            f"(Zielwert {kpi.text(kpi.target)})."
         )
     else:
         sentence = (
             f"Für {label} liegt {kpi.subject} seit {fmt.week(start_week)} bei "
             f"{kpi.text(current)} gegenüber {kpi.text(baseline)} in den "
-            f"acht Wochen davor (z-Wert {fmt.number(zscore, 1)}; "
-            f"Zielwert {kpi.text(kpi.target)})."
+            f"acht Wochen davor (Zielwert {kpi.text(kpi.target)})."
         )
     if extra:
         sentence = f"{sentence} {extra}"
@@ -1430,7 +1436,7 @@ def roadmap_points(dataset: Dataset, case: dict) -> list[dict]:
             "owner": "Partnermanagement",
             "text": (f"Zusätzliche Angebotskapazität für {fmt.count(count)} Wochen einplanen "
                      f"und den Abruf spätestens in {fmt.week(max(1, first - 4))} auslösen."),
-            "rule": "Regel: Zahl der verbleibenden Engpasswochen größer als null (AK-15.4).",
+            "rule": "Regel: Zahl der verbleibenden Engpasswochen größer als null.",
         })
     else:
         points.append({
@@ -1438,7 +1444,7 @@ def roadmap_points(dataset: Dataset, case: dict) -> list[dict]:
             "owner": "Partnermanagement",
             "text": (f"Bei {volume_text} Mehrvolumen bleibt keine Engpasswoche; die "
                      f"geplante Angebotskapazität der Vertretungen trägt das Volumen."),
-            "rule": "Regel: keine Engpasswoche im Ergebnis (AK-15.4).",
+            "rule": "Regel: keine Engpasswoche im Ergebnis.",
         })
     if over_flex:
         points.append({
