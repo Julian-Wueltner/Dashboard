@@ -539,7 +539,8 @@ def test_the_impact_of_the_win_rate_case_recomputes_from_the_dataset(dataset, fi
     assert chain["Entschiedene Angebote im Zeitraum"] == fmt.count(decided)
     assert chain["Zusätzlich verlorene Angebote"] == fmt.count(lost)
     assert chain["Deckungsbeitrag je Auftrag im Markt"] == fmt.euro(margin)
-    assert chain["Geschätzte Wirkung"] == finding["impact"]["euro_text"]
+    assert chain["Geschätzte Wirkung"] == finding["impact"]["euro_exact_text"]
+    assert finding["impact"]["euro_text"] == "rund " + fmt.euro_estimate(finding["impact"]["euro"])
     assert finding["impact"]["euro"] == pytest.approx(lost * margin, abs=0.005)
 
 

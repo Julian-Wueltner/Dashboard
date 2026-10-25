@@ -6740,7 +6740,8 @@
    },
    "impact": {
     "euro": 955100.41,
-    "euro_text": "955.100,41 €",
+    "euro_text": "rund 0,96 Mio. €",
+    "euro_exact_text": "955.100,41 €",
     "euro_compact": "955,1 Tsd. €",
     "quantity": 737.0,
     "quantity_unit": "zusätzlich verlorene Angebote",
@@ -7082,7 +7083,8 @@
    },
    "impact": {
     "euro": 9435.0,
-    "euro_text": "9.435,00 €",
+    "euro_text": "rund 9.400 €",
+    "euro_exact_text": "9.435,00 €",
     "euro_compact": "9,4 Tsd. €",
     "quantity": 51.0,
     "quantity_unit": "zusätzlich reklamierte Positionen",
@@ -7272,6 +7274,7 @@
    "impact": {
     "euro": null,
     "euro_text": "nicht in Euro bezifferbar",
+    "euro_exact_text": null,
     "euro_compact": null,
     "quantity": 78.0,
     "quantity_unit": "zusätzlich verspätete oder unvollständige Aufträge",
@@ -7581,10 +7584,11 @@
    "impact": {
     "euro": null,
     "euro_text": "nicht in Euro bezifferbar",
+    "euro_exact_text": null,
     "euro_compact": null,
-    "quantity": 105266.17711835878,
-    "quantity_unit": "zusätzliche Wartezeit der Kunden",
-    "quantity_text": "105.266,2 Stunden",
+    "quantity": 17.445504991441627,
+    "quantity_unit": "längere Wartezeit je Angebot",
+    "quantity_text": "+17,4 Stunden",
     "chain": [
      {
       "label": "Versendete Angebote im Zeitraum",
@@ -7602,9 +7606,9 @@
       "source": "facts_weekly: stage1_inquiry_to_quote_hours / quotes_sent"
      },
      {
-      "label": "Zusätzliche Wartezeit der Kunden",
-      "value": "105.266,2 Stunden",
-      "source": "Angebote × Abweichung der Durchlaufzeit"
+      "label": "Zusätzliche Wartezeit je Angebot",
+      "value": "+17,4 Stunden",
+      "source": "Durchlaufzeit im Zeitraum − Vergleichsbasis"
      }
     ],
     "note": "Die Wartezeit erzeugt im Datensatz keinen eigenen Kostenposten; der entgangene Deckungsbeitrag steht beim auslösenden Befund und wird nicht doppelt gezählt.",
@@ -7893,6 +7897,7 @@
    "impact": {
     "euro": null,
     "euro_text": "nicht in Euro bezifferbar",
+    "euro_exact_text": null,
     "euro_compact": null,
     "quantity": 359.0,
     "quantity_unit": "zusätzliche Kundenwochen ohne Kontakt",
@@ -17029,7 +17034,7 @@
    "sentences": [
     "Im Markt SE ist die Angebotserfolgsquote der Vertretung seit KW 32 von 33,7 % auf 21,2 % gefallen; im Markt ist ein lokaler Wettbewerber aufgetreten.",
     "Seit KW 33 steigt im selben Markt die Angebotsdurchlaufzeit von 22,0 Stunden auf 39,4 Stunden, weil mehr Angebote nachverhandelt werden — zeitlicher Zusammenhang, kein statistischer Ursachennachweis.",
-    "Von 5.901 entschiedenen Angeboten gingen 737 zusätzlich verloren; der entgangene Deckungsbeitrag liegt bei 955.100,41 €."
+    "Von 5.901 entschiedenen Angeboten gingen 737 zusätzlich verloren; der entgangene Deckungsbeitrag liegt bei rund 0,96 Mio. €."
    ],
    "notice": "[automatisch erstellt]"
   },
@@ -17164,13 +17169,13 @@
   },
   "recommendation": {
    "option": "C",
-   "text": "Empfohlen wird Option C: Die Stärkung der bestehenden Vertretung wirkt in 8 Wochen bei geringstem Risiko und soll die Angebotserfolgsquote im Markt SE von 21,2 % auf den Zielwert 32,0 % zurückführen; die Angebotsdurchlaufzeit soll von 39,4 Stunden auf den Zielwert 24,0 Stunden sinken. Im Befundzeitraum gingen 737 Angebote zusätzlich verloren, entgangen sind 955.100,41 € Deckungsbeitrag. Der Preis dieser Entscheidung: Option C schließt den Preisabstand zum neuen Wettbewerber nicht und schafft keine Kapazität für das Wachstum in NO — das leistet nur Option B.",
+   "text": "Empfohlen wird Option C: Die Stärkung der bestehenden Vertretung wirkt in 8 Wochen bei geringstem Risiko und soll die Angebotserfolgsquote im Markt SE von 21,2 % auf den Zielwert 32,0 % zurückführen; die Angebotsdurchlaufzeit soll von 39,4 Stunden auf den Zielwert 24,0 Stunden sinken. Im Befundzeitraum gingen 737 Angebote zusätzlich verloren, entgangen sind rund 0,96 Mio. € Deckungsbeitrag. Der Preis dieser Entscheidung: Option C schließt den Preisabstand zum neuen Wettbewerber nicht und schafft keine Kapazität für das Wachstum in NO — das leistet nur Option B.",
    "expected_win_rate_from_text": "21,2 %",
    "expected_win_rate_to_text": "32,0 %",
    "expected_lead_time_from_text": "39,4 Stunden",
    "expected_lead_time_to_text": "24,0 Stunden",
    "lost_quotes_text": "737",
-   "impact_text": "955.100,41 €"
+   "impact_text": "rund 0,96 Mio. €"
   },
   "escalation_trigger": {
    "text": "Bleibt die Angebotserfolgsquote im Markt SE acht Wochen nach Abschluss der Zielvereinbarung unter dem Zielwert von 32,0 %, wird Option B vorbereitet.",
@@ -17223,7 +17228,7 @@
   "situation": {
    "sentences": [
     "Stand KW 52 erreichen 9 von 10 Kennzahlen ihren Zielwert, 1 liegt zwischen Zielwert und Warnschwelle und 0 verfehlen die Warnschwelle.",
-    "Die automatische Analyse führt 4 laufende Auffälligkeiten; die größte geschätzte Wirkung trägt F-01 (Angebotserfolgsquote, Markt SE, Vertretung 4 (SE)) mit 955.100,41 €.",
+    "Die automatische Analyse führt 4 laufende Auffälligkeiten; die größte geschätzte Wirkung trägt F-01 (Angebotserfolgsquote, Markt SE, Vertretung 4 (SE)) mit rund 0,96 Mio. €.",
     "Die Liefertreue im Markt PL liegt nach der abgeschlossenen Maßnahme bei 95,9 % seit KW 14 und damit über dem Zielwert von 95,0 %."
    ],
    "notice": "[automatisch erstellt]"
@@ -17346,7 +17351,7 @@
     "kpi_label": "Angebotserfolgsquote",
     "entity_label": "Markt SE, Vertretung 4 (SE)",
     "department": "Vertrieb",
-    "impact_text": "955.100,41 €",
+    "impact_text": "rund 0,96 Mio. €",
     "quantity_text": "737",
     "quantity_unit": "zusätzlich verlorene Angebote",
     "severity": "hoch",
@@ -17357,7 +17362,7 @@
     "kpi_label": "Reklamationsquote je Artikel",
     "entity_label": "Artikel MOD-1042 (Formteile)",
     "department": "Qualität",
-    "impact_text": "9.435,00 €",
+    "impact_text": "rund 9.400 €",
     "quantity_text": "51",
     "quantity_unit": "zusätzlich reklamierte Positionen",
     "severity": "hoch",
@@ -17369,8 +17374,8 @@
     "entity_label": "Markt SE",
     "department": "Vertriebsinnendienst",
     "impact_text": "nicht in Euro bezifferbar",
-    "quantity_text": "105.266,2 Stunden",
-    "quantity_unit": "zusätzliche Wartezeit der Kunden",
+    "quantity_text": "+17,4 Stunden",
+    "quantity_unit": "längere Wartezeit je Angebot",
     "severity": "hoch",
     "proposed_action": "Angebotsfreigaben im Vertriebsinnendienst bündeln und Standardangebote für wiederkehrende Anfragen vorbereiten."
    }
@@ -17423,7 +17428,7 @@
   "angebote_entschieden": "5.901",
   "angebote_verloren": "737",
   "db_je_auftrag_markt": "1.295,93 €",
-  "wirkung_fall_euro": "955.100,41 €",
+  "wirkung_fall_euro": "rund 0,96 Mio. €",
   "wirkung_fall_euro_kompakt": "955,1 Tsd. €",
   "umsatzindex_markt_vorher": "105,6",
   "umsatzindex_markt_nachher": "65,7",
@@ -17433,7 +17438,7 @@
   "angebotszeit_abweichung": "17,4 Stunden",
   "angebotszeit_ziel": "24,0 Stunden",
   "angebotszeit_versatz_wochen": "1",
-  "angebotszeit_wartestunden": "105.266,2 Stunden",
+  "angebotszeit_wartestunden": "+17,4 Stunden",
   "folgeeffekt_referenz": "F-01",
   "artikel_id": "MOD-1042",
   "artikel_gruppe": "Formteile",
@@ -17447,7 +17452,7 @@
   "artikel_hauptgrund": "Maßabweichung",
   "artikel_hauptgrund_anteil": "68 %",
   "artikel_zusatzreklamationen": "51",
-  "artikel_wirkung_euro": "9.435,00 €",
+  "artikel_wirkung_euro": "rund 9.400 €",
   "kosten_je_reklamation": "185,00 €",
   "wachstum_markt": "NO",
   "wachstum_beginn_kw": "KW 41",
@@ -17511,11 +17516,10 @@
   "skandinavien_laender": "Schweden, Norwegen und Dänemark",
   "szenario_partner_laender": "Norwegen und Dänemark",
   "szenario_engpass_schwelle": "92,0 %",
-  "wirkung_fall_euro_rund": "955 Tsd. €",
+  "wirkung_fall_euro_rund": "0,96 Mio. €",
   "db_je_auftrag_rund": "1.296 €",
-  "angebotszeit_wartestunden_rund": "105.000 Stunden",
-  "artikel_wirkung_euro_rund": "9,4 Tsd. €",
-  "option_a_kosten_rund": "311 Tsd. €",
+  "artikel_wirkung_euro_rund": "9.400 €",
+  "option_a_kosten_rund": "0,31 Mio. €",
   "option_b_einmalig_rund": "1,4 Mio. €",
   "option_b_laufend_rund": "0,95 Mio. €",
   "liefertreue_veraenderung_lang": "+9,3 Prozentpunkte",

@@ -69,6 +69,12 @@ class TestUnits:
     def test_euro_thousands(self):
         assert fmt.euro_thousands(12400) == f"12,4{NNBSP}Tsd.{NNBSP}€"
 
+    def test_euro_estimate_avoids_false_precision(self):
+        assert fmt.euro_estimate(955100.41) == f"0,96{NNBSP}Mio.{NNBSP}€"
+        assert fmt.euro_estimate(1400000) == f"1,40{NNBSP}Mio.{NNBSP}€"
+        assert fmt.euro_estimate(9435.0) == f"9.400{NNBSP}€"
+        assert fmt.euro_estimate(87.4) == f"87{NNBSP}€"
+
     def test_days_uses_singular_and_plural(self):
         assert fmt.days(2.3) == f"2,3{NNBSP}Tage"
         assert fmt.days(1.0) == f"1,0{NNBSP}Tag"

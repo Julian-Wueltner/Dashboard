@@ -483,6 +483,7 @@ def _impact_for(dataset: an.Dataset, kpi_key: str, filters: dict, start: int, en
     if kpi_key == "quote_lead_time_h":
         quotes = an.field_sum(dataset, "facts_weekly", "quotes_sent", filters, start, end)
         extra_hours = quotes * (current - baseline)
+        per_quote = current - baseline
         chain = [
             an.chain_step("Versendete Angebote im Zeitraum", fmt.count(quotes),
                           "facts_weekly: quotes_sent"),
@@ -490,11 +491,13 @@ def _impact_for(dataset: an.Dataset, kpi_key: str, filters: dict, start: int, en
                           "facts_weekly: stage1_inquiry_to_quote_hours / quotes_sent"),
             an.chain_step("Angebotsdurchlaufzeit im Zeitraum", fmt.hours(current),
                           "facts_weekly: stage1_inquiry_to_quote_hours / quotes_sent"),
-            an.chain_step("Zusätzliche Wartezeit der Kunden", fmt.hours(extra_hours),
-                          "Angebote × Abweichung der Durchlaufzeit"),
+            an.chain_step("Zusätzliche Wartezeit je Angebot", fmt.hours(per_quote, signed=True),
+                          "Durchlaufzeit im Zeitraum − Vergleichsbasis"),
         ]
-        return _impact(None, extra_hours, "zusätzliche Wartezeit der Kunden",
-                       fmt.hours(extra_hours), chain,
+        # Ausgewiesen wird die Mehrdauer je Angebot: Eine über alle Angebote
+        # summierte Wartezeit (sechsstellige Stundenzahl) ist als Wirkung nicht lesbar.
+        return _impact(None, per_quote, "längere Wartezeit je Angebot",
+                       fmt.hours(per_quote, signed=True), chain,
                        "Die Wartezeit erzeugt im Datensatz keinen eigenen Kostenposten; "
                        "der entgangene Deckungsbeitrag steht beim auslösenden Befund und "
                        "wird nicht doppelt gezählt.",
@@ -565,7 +568,10 @@ def _impact(euro: float | None, quantity: float, quantity_unit: str,
             hours: float | None = None, weeks_over: int | None = None) -> dict:
     block = {
         "euro": _round(euro),
-        "euro_text": fmt.euro(euro) if euro is not None else "nicht in Euro bezifferbar",
+        # Angezeigt wird die gerundete Schätzung; der genaue Betrag steht in der Kette.
+        "euro_text": ("rund " + fmt.euro_estimate(euro) if euro is not None
+                      else "nicht in Euro bezifferbar"),
+        "euro_exact_text": fmt.euro(euro) if euro is not None else None,
         "euro_compact": fmt.euro_thousands(euro) if euro is not None else None,
         "quantity": _round(quantity),
         "quantity_unit": quantity_unit,
@@ -1538,12 +1544,10 @@ def build_case_study(dataset: an.Dataset, kpis: dict, findings: list[dict],
         "skandinavien_laender": market_names(nordic_markets),
         "szenario_partner_laender": market_names(market_of_partner(critical)),
         "szenario_engpass_schwelle": scenario_block["bottleneck_threshold_text"],
-        "wirkung_fall_euro_rund": fmt.euro_thousands(win["impact"]["euro"], 0),
+        "wirkung_fall_euro_rund": fmt.euro_estimate(win["impact"]["euro"]),
         "db_je_auftrag_rund": fmt.euro(_number_in(step(win, "Deckungsbeitrag je Auftrag")), 0),
-        "angebotszeit_wartestunden_rund": (
-            fmt.count(round(lead["impact"]["quantity"], -3)) + fmt.NNBSP + "Stunden"),
-        "artikel_wirkung_euro_rund": fmt.euro_thousands(article["impact"]["euro"], 1),
-        "option_a_kosten_rund": fmt.euro_thousands(decision["figures"]["concession_cost_value"], 0),
+        "artikel_wirkung_euro_rund": fmt.euro_estimate(article["impact"]["euro"]),
+        "option_a_kosten_rund": fmt.euro_estimate(decision["figures"]["concession_cost_value"]),
         "option_b_einmalig_rund": millions(float(dataset.parameters.get(
             "subsidiary_setup_cost_eur", 0.0))),
         "option_b_laufend_rund": millions(float(dataset.parameters.get(

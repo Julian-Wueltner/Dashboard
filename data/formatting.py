@@ -26,6 +26,8 @@ Conventions (DIN 5008, business reporting style)
 
 from __future__ import annotations
 
+import math
+
 from decimal import Decimal, ROUND_HALF_UP
 
 # A narrow no-break space: keeps "94,3" and "%" on the same line without the wide
@@ -92,6 +94,20 @@ def euro(value: float, decimals: int = 2, *, signed: bool = False) -> str:
 def euro_thousands(value: float, decimals: int = 1, *, signed: bool = False) -> str:
     """Format a large amount compactly (``12,4 Tsd. €``) for tiles and headlines."""
     return number(value / 1000, decimals, signed=signed) + NNBSP + "Tsd." + NNBSP + "€"
+
+
+def euro_estimate(value: float) -> str:
+    """An estimated amount without false precision (``0,96 Mio. €``, ``9.400 €``).
+
+    Estimates are rounded to two significant digits; from 100,000 € on they are
+    given in millions. The exact amount stays in the calculation chain.
+    """
+    if abs(value) >= 100_000:
+        return number(value / 1_000_000, 2) + NNBSP + "Mio." + NNBSP + "€"
+    if value == 0:
+        return number(0) + NNBSP + "€"
+    digits = 1 - int(math.floor(math.log10(abs(value))))
+    return number(round(value, digits), 0) + NNBSP + "€"
 
 
 def days(value: float, decimals: int = 1, *, signed: bool = False) -> str:
