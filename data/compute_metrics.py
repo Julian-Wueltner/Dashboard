@@ -60,6 +60,27 @@ BREAKDOWN_LEVELS = [
 ]
 
 PARTNER_NAME = dict(an.PARTNER_LABEL)
+
+#: Ausgeschriebene Ländernamen für Texte, die auch ohne Vertriebswissen lesbar sein
+#: sollen (Case Study). Cockpit und Kennzahlenblöcke behalten die Kürzel.
+MARKET_NAME = {"DE": "Deutschland", "FR": "Frankreich", "IT": "Italien",
+               "GB": "Großbritannien", "PL": "Polen", "NL": "Niederlande",
+               "SE": "Schweden", "NO": "Norwegen", "DK": "Dänemark", "FI": "Finnland"}
+
+
+def market_names(codes: list[str]) -> str:
+    """``["SE", "NO", "DK"]`` -> ``"Schweden, Norwegen und Dänemark"``."""
+    names = [MARKET_NAME.get(code, code) for code in codes]
+    return names[0] if len(names) == 1 else ", ".join(names[:-1]) + " und " + names[-1]
+
+
+def _number_in(text: str) -> float:
+    """Zahl aus einem formatierten deutschen Text (``"1.295,93 €"`` -> ``1295.93``)."""
+    import re
+    match = re.search(r"-?[\d.]+(?:,\d+)?", text)
+    return float(match.group(0).replace(".", "").replace(",", ".")) if match else 0.0
+
+
 CHANNEL_NAME = dict(an.CHANNEL_LABEL)
 
 
@@ -1361,6 +1382,19 @@ def build_case_study(dataset: an.Dataset, kpis: dict, findings: list[dict],
     def week_or_none(week: int | None) -> str:
         return fmt.week(week) if week else "keine"
 
+    def market_of_partner(partner: str) -> list[str]:
+        """Märkte eines Partners, umsatzstärkster zuerst."""
+        rows = an.filtered_rows(dataset.facts, {"partner": {partner}})
+        codes = {dataset.facts.at(row, "market") for row in rows}
+        return sorted(codes, key=lambda code: -an.field_sum(
+            dataset, "facts_weekly", "revenue_eur", {"market": {code}},
+            dataset.weeks[0], last_week))
+
+    def millions(value: float) -> str:
+        return fmt.number(value / 1_000_000, 2 if value % 100_000 else 1) + fmt.NNBSP + "Mio." + fmt.NNBSP + "€"
+
+    nordic_markets = market_of_partner(win["entity"]["partner"]) + market_of_partner(critical)
+
     values = {
         # -- Rahmen --------------------------------------------------------- #
         "stand_kw": fmt.week(last_week),
@@ -1493,6 +1527,29 @@ def build_case_study(dataset: an.Dataset, kpis: dict, findings: list[dict],
         "effizienz_reklamationen_je_woche": efficiency["positions"][1]["quantity_per_week_text"],
         "effizienz_minuten_anfrage": efficiency["positions"][0]["minutes_per_case_text"],
         "effizienz_minuten_reklamation": efficiency["positions"][1]["minutes_per_case_text"],
+
+        # -- Lesefassung für die Case Study --------------------------------- #
+        # Ländernamen statt Kürzel und gerundete Beträge: Die Case Study richtet
+        # sich auch an Leser ohne Vertriebs- und Statistikwissen. Die exakten
+        # Werte bleiben oben und im Cockpit erhalten.
+        "fall_land": MARKET_NAME[win["entity"]["market"]],
+        "wachstum_land": MARKET_NAME[growth["entity"]["market"]],
+        "liefertreue_land": MARKET_NAME[otif["entity"]["market"]],
+        "skandinavien_laender": market_names(nordic_markets),
+        "szenario_partner_laender": market_names(market_of_partner(critical)),
+        "szenario_engpass_schwelle": scenario_block["bottleneck_threshold_text"],
+        "wirkung_fall_euro_rund": fmt.euro_thousands(win["impact"]["euro"], 0),
+        "db_je_auftrag_rund": fmt.euro(_number_in(step(win, "Deckungsbeitrag je Auftrag")), 0),
+        "angebotszeit_wartestunden_rund": (
+            fmt.count(round(lead["impact"]["quantity"], -3)) + fmt.NNBSP + "Stunden"),
+        "artikel_wirkung_euro_rund": fmt.euro_thousands(article["impact"]["euro"], 1),
+        "option_a_kosten_rund": fmt.euro_thousands(decision["figures"]["concession_cost_value"], 0),
+        "option_b_einmalig_rund": millions(float(dataset.parameters.get(
+            "subsidiary_setup_cost_eur", 0.0))),
+        "option_b_laufend_rund": millions(float(dataset.parameters.get(
+            "subsidiary_running_cost_eur_per_year", 0.0))),
+        "liefertreue_veraenderung_lang": measure["change_text"].replace(
+            fmt.NNBSP + "pp", fmt.NNBSP + "Prozentpunkte"),
 
         # -- Regelwerk der automatischen Analyse ---------------------------- #
         "regel_baseline_wochen": fmt.count(dataset.baseline_weeks),

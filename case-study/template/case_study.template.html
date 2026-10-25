@@ -167,97 +167,104 @@ h3.zwischen{ margin-top:2.4mm; }
 <body>
 
 <!-- ================================================================ -->
-<!-- SEITE 1 - Ausgangslage, Analyse, Handlungsfelder                  -->
+<!-- SEITE 1 - Kernaussage, Ausgangslage, Analyse, Handlungsfelder     -->
 <!-- ================================================================ -->
 <div class="seite">
 
   <div class="hinweiszeile">Demo mit fiktiven Daten · eigene Initiative · erstellt mit KI-Unterstützung</div>
 
-  <h1>Angebotserfolgsquote im Markt {{fall_markt}}: vom Kennzahlenabfall zur Entscheidung</h1>
-  <p class="untertitel">Arbeitsprobe internationaler Vertrieb — automatische Analyse, Handlungsfelder und Entscheidungsvorlage aus einem Datensatz</p>
+  <h1>{{fall_land}}: Warum die Vertretung weniger Aufträge gewinnt — und was jetzt zu tun ist</h1>
+  <p class="untertitel">Arbeitsprobe internationaler Vertrieb — ein Problem erkennen, einordnen und der Geschäftsleitung zur Entscheidung vorlegen</p>
   <div class="kopfmeta">
     <span>Julian Wültner</span>
     <span>Stand: {{stand_kw}}</span>
-    <span>Datensatz: {{zeitraum_datensatz}}, {{anzahl_maerkte}} Märkte, {{anzahl_kennzahlen}} Kennzahlen</span>
-    <span>Auswahl: Markt {{fall_markt}}</span>
+    <span>Datenbasis: {{zeitraum_datensatz}}, {{anzahl_maerkte}} Länder, {{anzahl_kennzahlen}} Kennzahlen</span>
+    <span>Schwerpunkt: {{fall_land}}</span>
   </div>
+
+  <section>
+    <div class="kasten">
+      <h3>Das Wichtigste in Kürze</h3>
+      <p>In {{fall_land}} gewinnt die Vertretung seit {{fall_beginn_kw}} nur noch {{erfolgsquote_nachher}} ihrer Angebote statt zuvor {{erfolgsquote_vorher}} — ein neuer Wettbewerber ist aufgetreten. Dadurch sind bisher rund {{wirkung_fall_euro_rund}} Deckungsbeitrag entgangen. Empfohlen wird, die bestehende Vertretung gezielt zu stärken; greift das nicht, wird eine eigene Vertriebsgesellschaft vorbereitet.</p>
+    </div>
+  </section>
 
   <section class="ausgangslage">
     <h2>Ausgangslage</h2>
-    <p>Im Markt {{fall_markt}} ist die Angebotserfolgsquote der {{fall_partner}} seit {{fall_beginn_kw}} von {{erfolgsquote_vorher}} auf {{erfolgsquote_nachher}} gefallen — {{erfolgsquote_abweichung}} gegenüber der Vergleichsbasis {{erfolgsquote_vergleichsbasis}} und unter dem Zielwert {{erfolgsquote_ziel}}. Ein lokaler Wettbewerber ist aufgetreten.</p>
-    <p>Mit {{angebotszeit_versatz_wochen}} Woche Versatz steigt seit {{angebotszeit_beginn_kw}} im selben Markt die Angebotsdurchlaufzeit von {{angebotszeit_vorher}} auf {{angebotszeit_nachher}}; ein zeitlicher Zusammenhang, kein Ursachennachweis.</p>
-    <p>Von {{angebote_entschieden}} entschiedenen Angeboten gingen {{angebote_verloren}} zusätzlich verloren; der entgangene Deckungsbeitrag liegt bei {{wirkung_fall_euro}} ({{db_je_auftrag_markt}} je Auftrag); der Umsatzindex fällt von {{umsatzindex_markt_vorher}} auf {{umsatzindex_markt_nachher}}.</p>
+    <p>Die Erfolgsquote — der Anteil gewonnener Angebote — liegt in {{fall_land}} seit {{fall_beginn_kw}} bei {{erfolgsquote_nachher}}. In den Wochen davor ({{erfolgsquote_vergleichsbasis}}) waren es {{erfolgsquote_vorher}}, das Ziel liegt bei {{erfolgsquote_ziel}}.</p>
+    <p>Kurz darauf, seit {{angebotszeit_beginn_kw}}, braucht ein Angebot im Schnitt {{angebotszeit_nachher}} statt {{angebotszeit_vorher}}, weil mehr nachverhandelt wird. Beides fällt zeitlich zusammen; ein Beweis für die Ursache ist das nicht.</p>
+    <p>Seit Beginn gingen {{angebote_verloren}} Aufträge mehr verloren als üblich. Bei rund {{db_je_auftrag_rund}} Deckungsbeitrag (Ertrag nach variablen Kosten) je Auftrag sind das rund {{wirkung_fall_euro_rund}}.</p>
   </section>
 
   <section>
     <h2>Analyse</h2>
     <div class="grafiken">
       <div class="grafik">
-        <p class="grafiktitel">Angebotserfolgsquote, Markt {{fall_markt}}</p>
+        <p class="grafiktitel">Erfolgsquote der Angebote, {{fall_land}}</p>
         <!--CHART:erfolgsquote-->
-        <p class="grafikquelle">Vergleichsbasis {{erfolgsquote_vergleichsbasis}}: {{erfolgsquote_vorher}}. Seit {{fall_beginn_kw}}: {{erfolgsquote_nachher}}, z-Wert {{erfolgsquote_zwert}}. Gesamtgeschäft {{erfolgsquote_gesamt}}.</p>
+        <p class="grafikquelle">Vor dem Einbruch ({{erfolgsquote_vergleichsbasis}}): {{erfolgsquote_vorher}}. Seit {{fall_beginn_kw}}: {{erfolgsquote_nachher}}. Zum Vergleich alle Länder: {{erfolgsquote_gesamt}}.</p>
       </div>
       <div class="grafik">
-        <p class="grafiktitel">Angebotsdurchlaufzeit, Markt {{fall_markt}}</p>
+        <p class="grafiktitel">Bearbeitungszeit je Angebot, {{fall_land}}</p>
         <!--CHART:angebotszeit-->
-        <p class="grafikquelle">Vor dem Anstieg: {{angebotszeit_vorher}}. Seit {{angebotszeit_beginn_kw}}: {{angebotszeit_nachher}}, Abstand {{angebotszeit_abweichung}}. Zielwert {{angebotszeit_ziel}}.</p>
+        <p class="grafikquelle">Vor dem Anstieg: {{angebotszeit_vorher}}. Seit {{angebotszeit_beginn_kw}}: {{angebotszeit_nachher}}. Ziel: {{angebotszeit_ziel}}.</p>
       </div>
     </div>
   </section>
 
   <section class="letzte">
     <h2>Erkannte Handlungsfelder</h2>
-    <p class="einleitung">Die automatische Analyse meldet {{anzahl_laufende_auffaelligkeiten}} laufende Auffälligkeiten; eine fünfte ist behoben und belegt, dass das Vorgehen trägt.</p>
+    <p class="einleitung">Das Cockpit hat in den Daten {{anzahl_laufende_auffaelligkeiten}} offene Probleme selbstständig erkannt; ein weiteres ist bereits behoben und zeigt, dass das Vorgehen wirkt.</p>
     <table class="handlungsfelder">
       <colgroup><col class="feld"><col class="bereich"><col class="wert"><col class="wirkung"><col class="status"></colgroup>
       <thead>
         <tr>
           <th scope="col">Handlungsfeld</th>
-          <th scope="col">Fachbereich</th>
-          <th scope="col">Messwert und Zielwert</th>
+          <th scope="col">Zuständig</th>
+          <th scope="col">Ist und Ziel</th>
           <th scope="col">Geschätzte Wirkung</th>
           <th scope="col">Status</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><span class="feldname">Angebotserfolgsquote</span><br><span class="nebentext">{{fall_entitaet}}, seit {{fall_beginn_kw}}</span></td>
+          <td><span class="feldname">Weniger gewonnene Angebote</span><br><span class="nebentext">{{fall_land}}, seit {{fall_beginn_kw}}</span></td>
           <td><!--FACHBEREICH:F-01--></td>
-          <td>{{erfolgsquote_nachher}} gegen {{erfolgsquote_ziel}}<br><span class="nebentext">Warnschwelle {{erfolgsquote_warnschwelle}}</span></td>
-          <td>{{wirkung_fall_euro_kompakt}}<br><span class="nebentext">{{angebote_verloren}} verlorene Angebote</span></td>
+          <td>{{erfolgsquote_nachher}}<br><span class="nebentext">Ziel {{erfolgsquote_ziel}}</span></td>
+          <td>{{wirkung_fall_euro_rund}}<br><span class="nebentext">{{angebote_verloren}} verlorene Aufträge</span></td>
           <td><!--AMPEL:F-01--></td>
         </tr>
         <tr>
-          <td><span class="feldname">Angebotsdurchlaufzeit</span><br><span class="nebentext">seit {{angebotszeit_beginn_kw}}, Folgeeffekt von {{folgeeffekt_referenz}}</span></td>
+          <td><span class="feldname">Längere Bearbeitung der Angebote</span><br><span class="nebentext">{{fall_land}}, seit {{angebotszeit_beginn_kw}}, Folge des ersten Punkts</span></td>
           <td><!--FACHBEREICH:F-04--></td>
-          <td>{{angebotszeit_nachher}}<br><span class="nebentext">gegen {{angebotszeit_ziel}}</span></td>
-          <td>{{angebotszeit_wartestunden}}<br><span class="nebentext">zusätzliche Wartezeit der Kunden</span></td>
+          <td>{{angebotszeit_nachher}}<br><span class="nebentext">Ziel {{angebotszeit_ziel}}</span></td>
+          <td>{{angebotszeit_wartestunden_rund}}<br><span class="nebentext">längere Wartezeit der Kunden, summiert</span></td>
           <td><!--AMPEL:F-04--></td>
         </tr>
         <tr>
-          <td><span class="feldname">Reklamationen Artikel {{artikel_id}}</span><br><span class="nebentext">{{artikel_gruppe}}, seit {{artikel_beginn_kw}}, Grund {{artikel_hauptgrund}}</span></td>
+          <td><span class="feldname">Mehr Reklamationen bei einem Bauteil</span><br><span class="nebentext">Artikel {{artikel_id}}, seit {{artikel_beginn_kw}}, meist {{artikel_hauptgrund}}</span></td>
           <td><!--FACHBEREICH:F-02--></td>
-          <td>{{artikel_quote}}<br><span class="nebentext">übrige Artikel {{artikel_vergleich_von}} bis {{artikel_vergleich_bis}}</span></td>
-          <td>{{artikel_wirkung_euro}}<br><span class="nebentext">{{artikel_zusatzreklamationen}} zusätzliche Reklamationen</span></td>
+          <td>{{artikel_quote}} reklamiert<br><span class="nebentext">vergleichbare Teile {{artikel_vergleich_von}} bis {{artikel_vergleich_bis}}</span></td>
+          <td>{{artikel_wirkung_euro_rund}}<br><span class="nebentext">{{artikel_zusatzreklamationen}} zusätzliche Reklamationen</span></td>
           <td><!--AMPEL:F-02--></td>
         </tr>
         <tr>
-          <td><span class="feldname">Wachstumsengpass Markt {{wachstum_markt}}</span><br><span class="nebentext">seit {{wachstum_beginn_kw}}, {{wachstum_wochen_ueber_engpass}} Wochen über der Engpassschwelle</span></td>
+          <td><span class="feldname">Wachstum überlastet die Vertretung</span><br><span class="nebentext">{{wachstum_land}}, seit {{wachstum_beginn_kw}}; seither {{wachstum_wochen_ueber_engpass}} Wochen am Kapazitätslimit</span></td>
           <td><!--FACHBEREICH:F-05--></td>
-          <td>Aktivitätsgrad {{aktivitaet_nachher}} gegen {{aktivitaet_ziel}}<br><span class="nebentext">Angebotsdurchlaufzeit {{wachstum_angebotszeit_nachher}}</span></td>
-          <td>{{wachstum_kundenwochen_ohne_kontakt}}<br><span class="nebentext">Kundenwochen ohne Kontakt</span></td>
+          <td>{{aktivitaet_nachher}} der Kunden betreut<br><span class="nebentext">Ziel {{aktivitaet_ziel}}</span></td>
+          <td>{{wachstum_kundenwochen_ohne_kontakt}}<br><span class="nebentext">Wochen, in denen ein Kunde ohne Kontakt blieb</span></td>
           <td><!--AMPEL:F-05--></td>
         </tr>
         <tr>
-          <td><span class="feldname">Liefertreue Markt {{liefertreue_markt}}</span><br><span class="nebentext">Maßnahme abgeschlossen, wirksam ab {{liefertreue_wirksam_ab}}</span></td>
+          <td><span class="feldname">Unpünktliche Lieferungen</span><br><span class="nebentext">{{liefertreue_land}}, Maßnahme wirkt seit {{liefertreue_wirksam_ab}}</span></td>
           <td><!--FACHBEREICH:F-03--></td>
-          <td>{{liefertreue_nachher_mit_zeitraum}}<br><span class="nebentext">gegen {{liefertreue_ziel}}</span></td>
-          <td>{{liefertreue_veraenderung}}<br><span class="nebentext">vorher {{liefertreue_vorher}} in {{liefertreue_zeitraum_vorher}}</span></td>
+          <td>{{liefertreue_nachher}} pünktlich<br><span class="nebentext">Ziel {{liefertreue_ziel}}</span></td>
+          <td>{{liefertreue_veraenderung_lang}}<br><span class="nebentext">vorher {{liefertreue_vorher}}</span></td>
           <td><!--AMPEL:F-03--></td>
         </tr>
       </tbody>
     </table>
-    <p class="fussnote">Erkennungsregel: eingefrorene Vergleichsbasis über {{regel_baseline_wochen}} Wochen, z-Wert ab {{regel_zschwelle}}, Alarm erst nach {{regel_folgewochen}} auffälligen Wochen, Mindeststichprobe {{regel_mindeststichprobe}} Vorgänge ({{regel_mindeststichprobe_artikel}} Positionen je Artikel). Die abgeschlossene Maßnahme vergleicht gegen den Zeitraum ab Wirksamkeit, nicht gegen das Jahresmittel von {{liefertreue_jahreswert}}. Alle Zusammenhänge sind zeitlich, nicht kausal.</p>
+    <p class="fussnote">Gemeldet wird nur, was deutlich vom üblichen Verlauf abweicht, das Ziel verfehlt und mindestens {{regel_folgewochen}} Wochen in Folge anhält. Gleichzeitige Veränderungen werden als zeitlicher Zusammenhang ausgewiesen, nicht als belegte Ursache.</p>
   </section>
 
   <div class="fusszeile">
@@ -273,13 +280,13 @@ h3.zwischen{ margin-top:2.4mm; }
 
   <div class="hinweiszeile">Demo mit fiktiven Daten · eigene Initiative · erstellt mit KI-Unterstützung</div>
 
-  <h1>Entscheidungsvorlage: Angebotserfolgsquote im Markt {{fall_markt}}</h1>
+  <h1>Entscheidungsvorlage: Mehr Aufträge in {{fall_land}} gewinnen</h1>
   <div class="kopfmeta">
-    <span>Bezug: Auffälligkeit {{folgeeffekt_referenz}}, {{fall_entitaet}}</span>
-    <span>Zielkennzahl: Angebotserfolgsquote {{massnahme_ziel}}</span>
+    <span>Bezug: Erfolgsquote der Angebote in {{fall_land}}</span>
+    <span>Ziel: {{massnahme_ziel}}</span>
     <span>Stand: {{stand_kw}}</span>
   </div>
-  <p>Zu entscheiden ist, auf welchem Weg die Angebotserfolgsquote von {{erfolgsquote_nachher}} zurück auf {{erfolgsquote_ziel}} kommt.</p>
+  <p>Zu entscheiden ist, auf welchem Weg die Erfolgsquote von heute {{erfolgsquote_nachher}} wieder das Ziel von {{erfolgsquote_ziel}} erreicht.</p>
 
   <section>
     <h2>Optionen</h2>
@@ -287,17 +294,17 @@ h3.zwischen{ margin-top:2.4mm; }
       <tbody>
         <tr>
           <td>Option A</td>
-          <td><span class="feldname">{{option_a_titel}}</span><br><span class="nebentext">Nachlass von {{option_a_nachlass}} auf neue Angebote; im Befundzeitraum {{option_a_kosten}} Deckungsbeitrag.</span></td>
+          <td><span class="feldname">{{option_a_titel}}</span><br><span class="nebentext">{{option_a_nachlass}} Preisnachlass auf neue Angebote; hätte seit Beginn rund {{option_a_kosten_rund}} Deckungsbeitrag gekostet.</span></td>
           <td>{{option_a_aufwand}}</td>
         </tr>
         <tr>
           <td>Option B</td>
-          <td><span class="feldname">{{option_b_titel}}</span><br><span class="nebentext">Eigene Gesellschaft für beide Vertretungen; einmalig {{option_b_einmalig}}, laufend {{option_b_laufend}} je Jahr.</span></td>
+          <td><span class="feldname">{{option_b_titel}}</span><br><span class="nebentext">Eigene Gesellschaft für {{skandinavien_laender}}; rund {{option_b_einmalig_rund}} einmalig, {{option_b_laufend_rund}} jährlich.</span></td>
           <td>{{option_b_aufwand}}</td>
         </tr>
         <tr>
           <td>Option C</td>
-          <td><span class="feldname">{{option_c_titel}}</span><br><span class="nebentext">Zielvereinbarung zur Erfolgsquote, Angebotsschulung und festes Wochengespräch mit der Vertretung.</span></td>
+          <td><span class="feldname">{{option_c_titel}}</span><br><span class="nebentext">Zielvereinbarung, Schulung zur Angebotserstellung und wöchentliches Gespräch mit der Vertretung.</span></td>
           <td>{{option_c_aufwand}}</td>
         </tr>
       </tbody>
@@ -309,35 +316,35 @@ h3.zwischen{ margin-top:2.4mm; }
     <table class="bewertung">
       <thead>
         <tr>
-          <th scope="col">Dimension</th>
+          <th scope="col">Kriterium</th>
           <th scope="col">Option A</th>
           <th scope="col">Option B</th>
-          <th scope="col" class="empfohlen">Option C</th>
+          <th scope="col" class="empfohlen">Option C (empfohlen)</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td class="feldname">Kosten, einmalig und laufend</td>
-          <td><span class="einstufung"><!--EINSTUFUNG:A:kosten--></span><span class="begruendung">Der Nachlass kostet laufend Deckungsbeitrag auf jedem neuen Auftrag im Markt.</span></td>
+          <td class="feldname">Kosten</td>
+          <td><span class="einstufung"><!--EINSTUFUNG:A:kosten--></span><span class="begruendung">Der Nachlass kostet auf jedem neuen Auftrag dauerhaft Ertrag.</span></td>
           <td><span class="einstufung"><!--EINSTUFUNG:B:kosten--></span><span class="begruendung">Gründung, Personal und Übergabe kosten einmalig und laufend deutlich mehr als eine Vertretung.</span></td>
           <td class="empfohlen"><span class="einstufung"><!--EINSTUFUNG:C:kosten--></span><span class="begruendung">Schulung und Zielvereinbarung kosten wenig; die Provision bleibt im bestehenden Rahmen.</span></td>
         </tr>
         <tr>
           <td class="feldname">Risiko</td>
           <td><span class="einstufung"><!--EINSTUFUNG:A:risiko--></span><span class="begruendung">Der Wettbewerber kann nachziehen; ein Nachlass lässt sich später kaum zurücknehmen.</span></td>
-          <td><span class="einstufung"><!--EINSTUFUNG:B:risiko--></span><span class="begruendung">Die Kunden wechseln während der Übergabe den Ansprechpartner; Wissen der Vertretung kann verloren gehen.</span></td>
-          <td class="empfohlen"><span class="einstufung"><!--EINSTUFUNG:C:risiko--></span><span class="begruendung">Der eingespielte Partner bleibt, die Kundenbeziehungen bleiben unverändert.</span></td>
+          <td><span class="einstufung"><!--EINSTUFUNG:B:risiko--></span><span class="begruendung">Kunden bekommen neue Ansprechpartner; Wissen der Vertretung kann verloren gehen.</span></td>
+          <td class="empfohlen"><span class="einstufung"><!--EINSTUFUNG:C:risiko--></span><span class="begruendung">Der eingespielte Partner und die Kundenbeziehungen bleiben unverändert.</span></td>
         </tr>
         <tr>
-          <td class="feldname">Zeit bis zur Wirkung</td>
+          <td class="feldname">Dauer bis zur Wirkung</td>
           <td><span class="einstufung"><!--EINSTUFUNG:A:zeit_bis_wirkung--></span><span class="begruendung">Neue Konditionen gelten nach rund vier Wochen für jedes neue Angebot.</span></td>
           <td><span class="einstufung"><!--EINSTUFUNG:B:zeit_bis_wirkung--></span><span class="begruendung">Gründung, Einstellung und Einarbeitung brauchen rund dreißig Wochen.</span></td>
           <td class="empfohlen"><span class="einstufung"><!--EINSTUFUNG:C:zeit_bis_wirkung--></span><span class="begruendung">Rund acht Wochen, bis Zielvereinbarung und Schulung abgeschlossen sind.</span></td>
         </tr>
         <tr>
-          <td class="feldname">Kundenwirkung</td>
-          <td><span class="einstufung"><!--EINSTUFUNG:A:kundenwirkung--></span><span class="begruendung">Der Preis wird wettbewerbsfähig; Angebotszeit und Betreuung bleiben unverändert.</span></td>
-          <td><span class="einstufung"><!--EINSTUFUNG:B:kundenwirkung--></span><span class="begruendung">Eigene Präsenz mit Technik und Innendienst vor Ort, auch für das Wachstum in NO.</span></td>
+          <td class="feldname">Nutzen für Kunden</td>
+          <td><span class="einstufung"><!--EINSTUFUNG:A:kundenwirkung--></span><span class="begruendung">Der Preis wird wettbewerbsfähig; Bearbeitungszeit und Betreuung bleiben gleich.</span></td>
+          <td><span class="einstufung"><!--EINSTUFUNG:B:kundenwirkung--></span><span class="begruendung">Eigene Mitarbeiter in Technik und Innendienst vor Ort, auch für das Wachstum in {{wachstum_land}}.</span></td>
           <td class="empfohlen"><span class="einstufung"><!--EINSTUFUNG:C:kundenwirkung--></span><span class="begruendung">Schnellere Angebote und engere Betreuung; der Preisabstand zum Wettbewerber bleibt.</span></td>
         </tr>
       </tbody>
@@ -347,35 +354,35 @@ h3.zwischen{ margin-top:2.4mm; }
   <section>
     <div class="kasten">
       <h3>Empfehlung</h3>
-      <p>Empfohlen wird Option {{empfehlung_option}}: Sie wirkt in {{option_c_aufwand}} bei geringstem Risiko und soll die Erfolgsquote von {{empfehlung_effekt_von}} auf {{empfehlung_effekt_bis}} und die Durchlaufzeit von {{empfehlung_angebotszeit_von}} auf {{empfehlung_angebotszeit_bis}} zurückführen. Der Preis: Für das Wachstum in {{wachstum_markt}} entsteht keine Kapazität — das leistet nur Option B.</p>
-      <p class="trigger"><span class="marke">Eskalationstrigger:</span> Bleibt die Angebotserfolgsquote im Markt {{fall_markt}} {{eskalation_frist}} der Zielvereinbarung unter {{eskalation_schwelle}}, wird Option B vorbereitet. Verantwortlich <!--VERANTWORTLICH-->.</p>
+      <p>Empfohlen wird Option {{empfehlung_option}}: Sie wirkt in {{option_c_aufwand}}, mit dem geringsten Risiko, und soll die Erfolgsquote von {{empfehlung_effekt_von}} auf {{empfehlung_effekt_bis}} heben und die Bearbeitungszeit je Angebot von {{empfehlung_angebotszeit_von}} auf {{empfehlung_angebotszeit_bis}} senken. Nachteil: Für das Wachstum in {{wachstum_land}} schafft sie keine zusätzliche Kapazität — das leistet nur Option B.</p>
+      <p class="trigger"><span class="marke">Absicherung:</span> Liegt die Erfolgsquote in {{fall_land}} {{eskalation_frist}} der Zielvereinbarung noch unter {{eskalation_schwelle}}, wird Option B vorbereitet. Verantwortlich: <!--VERANTWORTLICH-->.</p>
     </div>
   </section>
 
   <section>
     <h2>Umsetzung und erwarteter Effekt</h2>
-    <h3>Zeitleiste der Maßnahme: von der Anforderung bis zur Bewertung</h3>
+    <h3>Ablauf der Maßnahme: von der Anforderung bis zur Erfolgskontrolle</h3>
     <div class="reihe">
-      <div class="phase"><span class="phasenname">Anforderung</span><span class="phasentext">Zielkennzahl und Zielwert</span></div>
-      <div class="phase"><span class="phasenname">Konzept</span><span class="phasentext">Drei bewertete Optionen</span></div>
-      <div class="phase"><span class="phasenname">Test/Pilot</span><span class="phasentext">Zielvereinbarung und Schulung</span></div>
-      <div class="phase"><span class="phasenname">Roll-out</span><span class="phasentext">Wochengespräch etabliert</span></div>
-      <div class="phase"><span class="phasenname">Bewertung</span><span class="phasentext">Vorher-nachher-Vergleich</span></div>
+      <div class="phase"><span class="phasenname">Anforderung</span><span class="phasentext">Ziel festlegen</span></div>
+      <div class="phase"><span class="phasenname">Konzept</span><span class="phasentext">Optionen bewerten</span></div>
+      <div class="phase"><span class="phasenname">Pilot</span><span class="phasentext">Zielvereinbarung und Schulung</span></div>
+      <div class="phase"><span class="phasenname">Einführung</span><span class="phasentext">Wöchentliches Gespräch etabliert</span></div>
+      <div class="phase"><span class="phasenname">Erfolgskontrolle</span><span class="phasentext">Vorher-nachher-Vergleich</span></div>
     </div>
     <h3 class="zwischen">Erwarteter Effekt in Zahlen</h3>
     <div class="reihe">
-      <div class="karte"><span class="kartenlabel">Angebotserfolgsquote</span><span class="kartenwert">{{empfehlung_effekt_von}} auf {{empfehlung_effekt_bis}}</span><span class="kartennote">Markt {{fall_markt}}, je Woche</span></div>
-      <div class="karte"><span class="kartenlabel">Angebotsdurchlaufzeit</span><span class="kartenwert">{{empfehlung_angebotszeit_von}} auf {{empfehlung_angebotszeit_bis}}</span><span class="kartennote">Zielwert der Kennzahl</span></div>
-      <div class="karte"><span class="kartenlabel">Entschiedene Angebote</span><span class="kartenwert">{{angebote_entschieden}} Angebote</span><span class="kartennote">davon {{angebote_verloren}} zusätzlich verloren</span></div>
-      <div class="karte"><span class="kartenlabel">Entgangener Deckungsbeitrag</span><span class="kartenwert">{{wirkung_fall_euro}}</span><span class="kartennote">{{angebote_verloren}} Aufträge je {{db_je_auftrag_markt}}</span></div>
+      <div class="karte"><span class="kartenlabel">Erfolgsquote der Angebote</span><span class="kartenwert">{{empfehlung_effekt_von}} auf {{empfehlung_effekt_bis}}</span><span class="kartennote">{{fall_land}}, je Woche</span></div>
+      <div class="karte"><span class="kartenlabel">Bearbeitungszeit je Angebot</span><span class="kartenwert">{{empfehlung_angebotszeit_von}} auf {{empfehlung_angebotszeit_bis}}</span><span class="kartennote">zurück auf das Ziel</span></div>
+      <div class="karte"><span class="kartenlabel">Zusätzlich verlorene Aufträge</span><span class="kartenwert">{{angebote_verloren}}</span><span class="kartennote">von {{angebote_entschieden}} entschiedenen Angeboten</span></div>
+      <div class="karte"><span class="kartenlabel">Entgangener Deckungsbeitrag</span><span class="kartenwert">rund {{wirkung_fall_euro_rund}}</span><span class="kartennote">seit Beginn des Problems</span></div>
     </div>
-    <p class="fussnote">Fortschritt {{massnahme_fortschritt}} Phasen, jede mit Freigabekriterium; verantwortlich <!--VERANTWORTLICH-->, beteiligt <!--BETEILIGT-->. Die Wirkung wird {{eskalation_frist}} gegen {{massnahme_ziel}} gemessen.</p>
+    <p class="fussnote">Stand: {{massnahme_fortschritt}} Phasen abgeschlossen. Verantwortlich <!--VERANTWORTLICH-->, beteiligt <!--BETEILIGT-->.</p>
   </section>
 
   <section class="letzte">
-    <h2>Ausblick: Wachstumsszenario</h2>
-    <p>Schon im Ist hat die {{szenario_partner}} {{szenario_engpasswochen_ist}} Engpasswochen ab {{szenario_erste_engpasswoche_ist}}; bei {{szenario_mehrvolumen}} Mehrvolumen sind es {{szenario_engpasswochen_ohne}}. Eine Tochtergesellschaft ab {{szenario_erweiterung_quartal}} mit {{szenario_verlagerung_anteil}} der Angebote senkt das auf {{szenario_engpasswochen_mit}} (Modellrechnung, keine Prognose).</p>
-    <p class="werkzeug">Live-Tool mit geführtem Demo-Fall: {{TOOL_URL}}</p>
+    <h2>Ausblick: Wachstum in Skandinavien</h2>
+    <p>Die Vertretung für {{szenario_partner_laender}} war im Jahr schon {{szenario_engpasswochen_ist}} Wochen über {{szenario_engpass_schwelle}} ausgelastet, bei {{szenario_mehrvolumen}} mehr Geschäft wären es {{szenario_engpasswochen_ohne}}. Eine eigene Gesellschaft ab {{szenario_erweiterung_quartal}} mit {{szenario_verlagerung_anteil}} der Angebote senkt das auf {{szenario_engpasswochen_mit}} (Modellrechnung).</p>
+    <p class="werkzeug">Interaktives Cockpit mit geführtem Demo-Fall: {{TOOL_URL}}</p>
   </section>
 
   <div class="fusszeile">
